@@ -9,7 +9,6 @@ services:
       - DB_URL_TEST=postgres://username:Dummy123@postgres/georio-store
     command: yarn db:migrate
 
-  
   georio: 
     environment:
       - NODE_ENV=development

@@ -8,7 +8,6 @@ services:
       - DB_URL=postgres://username:Dummy123@postgres/georio-store
       - DB_URL_TEST=postgres://username:Dummy123@postgres/georio-store
     command: yarn db:migrate
-
   
   georio: 
     environment:

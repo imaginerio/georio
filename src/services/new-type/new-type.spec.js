@@ -1,12 +1,33 @@
+const { Layer, Type, Sequelize } = require('@models');
+
+const { Op } = Sequelize;
+
 /* eslint-disable arrow-body-style */
 const service = require('./new-type.service');
 
 describe('Service - newType', () => {
-  beforeEach(() => {});
+  beforeEach(() => Layer.create({ name: 'testLayer' })
+    .then(layer => Type.create({ name: 'testTypeBefore' })
+      .then(type => type.setLayer(layer))));
 
-  afterEach(() => {});
+  afterEach(() => Layer.destroy({
+    where: {
+      name: 'testLayer'
+    }
+  }).then(() => {
+    return Type.destroy({
+      where: {
+        name: {
+          [Op.iLike]: `test%`
+        }
+      }
+    });
+  }));
 
-  it('TODO: should do unit test for ', () => {
-    service();
-  });
+  it('should do unit test for ', () => Layer.findOne({
+    where: {
+      name: 'testLayer'
+    }
+  }).then(layer => service(layer, 'testType')
+    .then(() => service(layer, 'testTypeBefore'))));
 });
