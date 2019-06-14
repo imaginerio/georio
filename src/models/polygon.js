@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
 
   Polygon.associate = (models) => {
-    Polygon.belongsTo(models.type);
+    Polygon.belongsTo(models.Type);
   };
 
   return Polygon;

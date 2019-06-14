@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Layer.associate = (models) => {
     Layer.belongsTo(models.Dataset);
+    Layer.hasMany(models.Type);
   };
   return Layer;
 };

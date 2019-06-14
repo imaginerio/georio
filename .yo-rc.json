@@ -7,6 +7,10 @@
     "description": "Database and API for manaing spatial data in the imagineRio project",
     "author": "Axis Maps",
     "src": "src",
-    "kind": "service"
+    "kind": "service",
+    "last_endpoint": "create-feature",
+    "last_apidesc": "Create a new point / line / polygon feature",
+    "last_method": "post",
+    "last_service": "newType"
   }
 }
