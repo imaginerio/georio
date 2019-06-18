@@ -7,8 +7,7 @@ module.exports = {
       type: Sequelize.INTEGER
     },
     remoteId: {
-      type: Sequelize.INTEGER,
-      unique: true
+      type: Sequelize.INTEGER
     },
     name: {
       type: Sequelize.TEXT
