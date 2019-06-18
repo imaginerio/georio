@@ -1,5 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Line = sequelize.define('Line', {
+    remoteId: DataTypes.INTEGER,
     name: DataTypes.TEXT,
     firstyear: DataTypes.INTEGER,
     lastyear: DataTypes.INTEGER,

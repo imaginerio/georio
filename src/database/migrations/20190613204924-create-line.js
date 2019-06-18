@@ -6,6 +6,10 @@ module.exports = {
       primaryKey: true,
       type: Sequelize.INTEGER
     },
+    remoteId: {
+      type: Sequelize.INTEGER,
+      unique: true
+    },
     name: {
       type: Sequelize.TEXT
     },

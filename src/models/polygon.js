@@ -1,5 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Polygon = sequelize.define('Polygon', {
+    remoteId: DataTypes.INTEGER,
     name: DataTypes.TEXT,
     firstyear: DataTypes.INTEGER,
     lastyear: DataTypes.INTEGER,
