@@ -7,7 +7,7 @@ const helmet = require('helmet');
 const interceptor = require('express-interceptor');
 const api = require('@api');
 const { errorMiddleware } = require('@middlewares/error');
-const middlewareMonitoring = require('@middlewares/monitoring');
+// const middlewareMonitoring = require('@middlewares/monitoring');
 
 /**
 * Express instance
@@ -33,7 +33,7 @@ app.use(helmet());
 app.use(cors());
 
 // Monitoring
-app.use(middlewareMonitoring);
+// app.use(middlewareMonitoring);
 
 const finalParagraphInterceptor = interceptor((req, res) => { // eslint-disable-line
   return {
