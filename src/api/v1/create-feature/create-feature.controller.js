@@ -6,9 +6,9 @@ const newFeature = require('@services/new-feature');
  * @public
  */
 exports.createFeature = async (req, res, next) => {
-  const { body } = req;
-  body.remoteId = body.objectid;
-  return newFeature(req.params.geom, req.params.type, body)
+  const { feature } = req.body;
+  feature.remoteId = feature.objectid;
+  return newFeature(req.params.geom, req.params.type, feature)
     .then((feat) => {
       if (feat) res.status(httpStatus.OK);
       else res.status(httpStatus.INTERNAL_SERVER_ERROR);
