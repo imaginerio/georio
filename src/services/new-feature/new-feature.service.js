@@ -30,7 +30,11 @@ const newFeatureService = (primitive, dataType, body) => {
   return newLayer(params.layer)
     .then(layer => newType(layer, params.type)
       .then(type => feature.create(params)
-        .then(feat => feat.setType(type))));
+        .then(feat => feat.setType(type))))
+    .catch((e) => {
+      console.log(body);
+      console.log(e);
+    });
 };
 
 module.exports = newFeatureService;
