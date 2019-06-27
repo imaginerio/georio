@@ -6,13 +6,14 @@ const { Op } = Sequelize;
 const service = require('./new-type.service');
 
 describe('Service - newType', () => {
-  beforeEach(() => Layer.create({ name: 'testLayer' })
+  beforeEach(() => Layer.create({ name: 'testLayer', geometry: 'polygon' })
     .then(layer => Type.create({ name: 'testTypeBefore' })
       .then(type => type.setLayer(layer))));
 
   afterEach(() => Layer.destroy({
     where: {
-      name: 'testLayer'
+      name: 'testLayer',
+      geometry: 'polygon'
     }
   }).then(() => {
     return Type.destroy({

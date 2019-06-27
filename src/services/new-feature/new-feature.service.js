@@ -27,7 +27,8 @@ const newFeatureService = (primitive, dataType, body) => {
   const { geom } = body;
   const params = body;
   params.geom = sequelize.fn('ST_Multi', geoFunc(geom));
-  return newLayer(params.layer)
+  params.geom_merc = sequelize.fn('ST_Transform', sequelize.fn('ST_Multi', geoFunc(geom)), 3857);
+  return newLayer(params.layer, params.geometry)
     .then(layer => newType(layer, params.type)
       .then(type => feature.create(params)
         .then(feat => feat.setType(type))))

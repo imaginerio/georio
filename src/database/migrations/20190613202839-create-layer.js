@@ -7,7 +7,12 @@ module.exports = {
       type: Sequelize.INTEGER
     },
     name: {
-      type: Sequelize.TEXT
+      type: Sequelize.TEXT,
+      allowNull: false
+    },
+    geometry: {
+      type: Sequelize.STRING,
+      allowNull: false
     },
     DatasetId: {
       type: Sequelize.INTEGER,

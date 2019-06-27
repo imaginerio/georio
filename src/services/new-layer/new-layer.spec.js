@@ -8,11 +8,12 @@ describe('Service - newLayer', () => {
 
   afterAll(() => Layer.destroy({
     where: {
-      name: 'testLayer'
+      name: 'testLayer',
+      geometry: 'polygon'
     }
   }));
 
   it('should do unit test for ', () => {
-    return service('testLayer').then(() => service('testLayer'));
+    return service('testLayer', 'polygon').then(() => service('testLayer', 'polygon'));
   });
 });
