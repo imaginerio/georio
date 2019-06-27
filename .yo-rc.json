@@ -8,9 +8,9 @@
     "author": "Axis Maps",
     "src": "src",
     "kind": "service",
-    "last_endpoint": "create-feature",
-    "last_apidesc": "Create a new point / line / polygon feature",
-    "last_method": "post",
-    "last_service": "newType"
+    "last_endpoint": "TileJSON",
+    "last_apidesc": "Returns TileJSON describing vector tiles",
+    "last_method": "get",
+    "last_service": "makeTile"
   }
 }
