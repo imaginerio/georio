@@ -36,6 +36,9 @@ module.exports = {
     geom: {
       type: Sequelize.GEOMETRY('MULTIPOINT', 4326)
     },
+    geom_merc: {
+      type: Sequelize.GEOMETRY('MULTILINESTRING', 3857)
+    },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE

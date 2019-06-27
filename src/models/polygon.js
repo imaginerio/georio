@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     lastyear: DataTypes.INTEGER,
     firstdate: DataTypes.DATEONLY,
     lastdate: DataTypes.DATEONLY,
-    geom: DataTypes.GEOMETRY('MULTIPOLYGON', 4326)
+    geom: DataTypes.GEOMETRY('MULTIPOLYGON', 4326),
+    geom_merc: DataTypes.GEOMETRY('MULTIPOLYGON', 3857)
   }, {});
 
   Polygon.associate = (models) => {

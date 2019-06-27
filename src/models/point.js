@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     lastyear: DataTypes.INTEGER,
     firstdate: DataTypes.DATEONLY,
     lastdate: DataTypes.DATEONLY,
-    geom: DataTypes.GEOMETRY('MULTIPOINT', 4326)
+    geom: DataTypes.GEOMETRY('MULTIPOINT', 4326),
+    geom_merc: DataTypes.GEOMETRY('MULTIPOINT', 3857)
   }, {});
 
   Point.associate = (models) => {

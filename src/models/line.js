@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     lastyear: DataTypes.INTEGER,
     firstdate: DataTypes.DATEONLY,
     lastdate: DataTypes.DATEONLY,
-    geom: DataTypes.GEOMETRY('MULTILINESTRING', 4326)
+    geom: DataTypes.GEOMETRY('MULTILINESTRING', 4326),
+    geom_merc: DataTypes.GEOMETRY('MULTILINESTRING', 3857)
   }, {});
 
   Line.associate = (models) => {
