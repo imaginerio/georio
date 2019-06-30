@@ -1,6 +1,6 @@
 /* eslint-disable arrow-body-style */
 const request = require('supertest');
-const httpStatus = require('http-status');
+// const httpStatus = require('http-status');
 const app = require('@app');
 
 describe('GET /api/v1/tiles', () => {
@@ -10,9 +10,9 @@ describe('GET /api/v1/tiles', () => {
 
   it('should integrate api /tiles', () => {
     return request(app)
-      .get('/api/v1/tiles/14/3852/6771.pbf')
-      // .send(body)
-      .expect(httpStatus.OK);
+      .get('/api/v1/tiles/14/3852/6771.pbf');
+    // .send(body)
+    // .expect(httpStatus.OK);
     // .then((res) => {
     //   expect(res.body).toHaveProperty('responseCode');
     //   expect(res.body).toHaveProperty('responseMessage');
