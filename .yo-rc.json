@@ -11,6 +11,6 @@
     "last_endpoint": "TileJSON",
     "last_apidesc": "Returns TileJSON describing vector tiles",
     "last_method": "get",
-    "last_service": "makeTile"
+    "last_service": "GetLayers"
   }
 }

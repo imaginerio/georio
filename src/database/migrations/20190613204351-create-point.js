@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('Points', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('points', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -37,7 +37,7 @@ module.exports = {
       type: Sequelize.GEOMETRY('MULTIPOINT', 4326)
     },
     geom_merc: {
-      type: Sequelize.GEOMETRY('MULTILINESTRING', 3857)
+      type: Sequelize.GEOMETRY('MULTIPOINT', 3857)
     },
     createdAt: {
       allowNull: false,
@@ -48,5 +48,5 @@ module.exports = {
       type: Sequelize.DATE
     }
   }),
-  down: queryInterface => queryInterface.dropTable('Points')
+  down: queryInterface => queryInterface.dropTable('points')
 };

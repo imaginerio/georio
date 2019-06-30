@@ -4,7 +4,7 @@ const compress = require('compression');
 const methodOverride = require('method-override');
 const cors = require('cors');
 const helmet = require('helmet');
-const interceptor = require('express-interceptor');
+// const interceptor = require('express-interceptor');
 const api = require('@api');
 const { errorMiddleware } = require('@middlewares/error');
 // const middlewareMonitoring = require('@middlewares/monitoring');
@@ -35,21 +35,21 @@ app.use(cors());
 // Monitoring
 // app.use(middlewareMonitoring);
 
-const finalParagraphInterceptor = interceptor((req, res) => { // eslint-disable-line
-  return {
-    isInterceptable: () => true,
-    intercept: (body, send) => {
-      try {
-        req.responseBody = JSON.parse(body);
-      } catch (e) {
-        req.responseBody = body;
-      }
-      send(body);
-    }
-  };
-});
+// const finalParagraphInterceptor = interceptor((req, res) => { // eslint-disable-line
+//   return {
+//     isInterceptable: () => true,
+//     intercept: (body, send) => {
+//       try {
+//         req.responseBody = JSON.parse(body);
+//       } catch (e) {
+//         req.responseBody = body;
+//       }
+//       send(body);
+//     }
+//   };
+// });
 
-app.use(finalParagraphInterceptor);
+// app.use(finalParagraphInterceptor);
 
 /**
  * Health status

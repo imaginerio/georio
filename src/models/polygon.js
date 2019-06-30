@@ -8,7 +8,9 @@ module.exports = (sequelize, DataTypes) => {
     lastdate: DataTypes.DATEONLY,
     geom: DataTypes.GEOMETRY('MULTIPOLYGON', 4326),
     geom_merc: DataTypes.GEOMETRY('MULTIPOLYGON', 3857)
-  }, {});
+  }, {
+    tableName: 'polygons'
+  });
 
   Polygon.associate = (models) => {
     Polygon.belongsTo(models.Type);

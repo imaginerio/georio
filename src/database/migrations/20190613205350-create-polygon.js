@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('Polygons', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('polygons', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -37,7 +37,7 @@ module.exports = {
       type: Sequelize.GEOMETRY('MULTIPOLYGON', 4326)
     },
     geom_merc: {
-      type: Sequelize.GEOMETRY('MULTILINESTRING', 3857)
+      type: Sequelize.GEOMETRY('MULTIPOLYGON', 3857)
     },
     createdAt: {
       allowNull: false,
@@ -48,5 +48,5 @@ module.exports = {
       type: Sequelize.DATE
     }
   }),
-  down: queryInterface => queryInterface.dropTable('Polygons')
+  down: queryInterface => queryInterface.dropTable('polygons')
 };

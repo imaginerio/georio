@@ -8,7 +8,9 @@ module.exports = (sequelize, DataTypes) => {
     lastdate: DataTypes.DATEONLY,
     geom: DataTypes.GEOMETRY('MULTILINESTRING', 4326),
     geom_merc: DataTypes.GEOMETRY('MULTILINESTRING', 3857)
-  }, {});
+  }, {
+    tableName: 'lines'
+  });
 
   Line.associate = (models) => {
     Line.belongsTo(models.Type);

@@ -8,7 +8,9 @@ module.exports = (sequelize, DataTypes) => {
     lastdate: DataTypes.DATEONLY,
     geom: DataTypes.GEOMETRY('MULTIPOINT', 4326),
     geom_merc: DataTypes.GEOMETRY('MULTIPOINT', 3857)
-  }, {});
+  }, {
+    tableName: 'points'
+  });
 
   Point.associate = (models) => {
     Point.belongsTo(models.Type);

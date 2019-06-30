@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('Lines', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('lines', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -48,5 +48,5 @@ module.exports = {
       type: Sequelize.DATE
     }
   }),
-  down: queryInterface => queryInterface.dropTable('Lines')
+  down: queryInterface => queryInterface.dropTable('lines')
 };
