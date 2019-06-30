@@ -1,5 +1,6 @@
 const express = require('express');
 const validate = require('express-validation');
+const { tileCacheMiddleware } = require('@middlewares/tile-cache');
 const controller = require('./tiles.controller');
 const validator = require('./tiles.validator');
 
@@ -21,6 +22,6 @@ const router = express.Router();
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
 router.route('/:z/:x/:y.pbf')
-  .get(validate(validator.joiSchema), controller.tiles);
+  .get(validate(validator.joiSchema), tileCacheMiddleware, controller.tiles);
 
 module.exports = router;
