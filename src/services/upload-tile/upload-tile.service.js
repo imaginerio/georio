@@ -10,7 +10,7 @@ const s3 = new AWS.S3();
 const uploadTileService = (params, tile) => {
   s3.putObject({
     Bucket: 'tilecache.axismaps.io',
-    Key: `highways-waterways/${params.z}/${params.x}/${params.y}.pbf`,
+    Key: `highways-waterways/${params.startYear}-${params.endYear}/${params.z}/${params.x}/${params.y}.pbf`,
     Body: tile,
     ACL: 'public-read'
   }, (err) => {

@@ -19,8 +19,8 @@ const makeTileService = (params, layer) => sequelize.query(
     INNER JOIN "Types" AS t ON "TypeId" = t.id
     INNER JOIN "Layers" AS l ON "LayerId" = l.id
     WHERE l.name = '${layer.name}'
-      AND firstyear <= 1950
-      AND lastyear >= 1950
+      AND firstyear <= ${params.startYear}
+      AND lastyear >= ${params.endYear}
       AND geom_merc && TileBBox(${params.z}, ${params.x}, ${params.y}, 3857)
   ) AS q WHERE geom IS NOT NULL`,
   { type: sequelize.QueryTypes.SELECT }
