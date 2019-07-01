@@ -8,8 +8,9 @@ const { Layer } = require('@models');
  * @public
  */
 exports.tiles = async (req, res, next) => Layer.getLayers()
-  .then((layers) => {
+  .then((allLayers) => {
     const params = makeParams(req);
+    const layers = allLayers.filter(l => l.minzoom <= params.z);
     const records = layers.map(l => tiles(params, l).then(tile => tile[0].mvt));
     return Promise.all(records).then((mvts) => {
       res.setHeader('Content-Type', 'application/x-protobuf');

@@ -1,7 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
   const Layer = sequelize.define('Layer', {
     name: DataTypes.TEXT,
-    geometry: DataTypes.STRING
+    geometry: DataTypes.STRING,
+    minzoom: DataTypes.INTEGER
   }, {});
 
   Layer.associate = (models) => {
@@ -10,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   Layer.getLayers = () => Layer.findAll({
-    attributes: ['id', 'name', 'geometry']
+    attributes: ['id', 'name', 'geometry', 'minzoom']
   });
 
   return Layer;
