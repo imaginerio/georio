@@ -22,7 +22,7 @@ exports.tileJSON = async (req, res, next) => Layer.getBaseLayers()
     res.status(httpStatus.OK);
     return res.json({
       tilejson: '3.0.0',
-      tiles: ['http://localhost:5000/api/v1/tiles/{z}/{x}/{y}.pbf'],
+      tiles: [`http://${req.headers.host}/api/v1/tiles/{z}/{x}/{y}.pbf`],
       bounds: [-96, 29, -94, 30],
       minZoom: 9,
       maxZoom: 17,
