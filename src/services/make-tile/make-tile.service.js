@@ -20,8 +20,8 @@ const makeTileService = (params, layer) => sequelize.query(
     INNER JOIN "Layers" AS l ON "LayerId" = l.id
     WHERE l.name = '${layer.name}'
       AND COALESCE(t.minzoom, l.minzoom) <= ${params.z}
-      AND firstyear <= ${params.startYear}
-      AND lastyear >= ${params.endYear}
+      AND firstyear <= ${params.firstyear}
+      AND lastyear >= ${params.lastyear}
       AND geom_merc && TileBBox(${params.z}, ${params.x}, ${params.y}, 3857)
   ) AS q WHERE geom IS NOT NULL`,
   { type: sequelize.QueryTypes.SELECT }

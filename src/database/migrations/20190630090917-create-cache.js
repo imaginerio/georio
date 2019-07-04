@@ -15,10 +15,10 @@ module.exports = {
     y: {
       type: Sequelize.INTEGER
     },
-    startYear: {
+    firstyear: {
       type: Sequelize.INTEGER
     },
-    endYear: {
+    lastyear: {
       type: Sequelize.INTEGER
     },
     createdAt: {

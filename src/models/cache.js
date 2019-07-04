@@ -3,8 +3,8 @@ module.exports = (sequelize, DataTypes) => {
     z: DataTypes.INTEGER,
     x: DataTypes.INTEGER,
     y: DataTypes.INTEGER,
-    startYear: DataTypes.INTEGER,
-    endYear: DataTypes.INTEGER
+    firstyear: DataTypes.INTEGER,
+    lastyear: DataTypes.INTEGER
   }, {});
 
   Cache.check = where => Cache.findOne({ where }).then((c) => {
