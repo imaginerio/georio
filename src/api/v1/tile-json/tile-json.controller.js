@@ -16,7 +16,7 @@ const fields = {
 exports.tileJSON = async (req, res, next) => Layer.getLayers()
   .then((layers) => {
     const vector_layers = layers.map(l => ({ // eslint-disable-line camelcase
-      id: l.name + l.geometry,
+      id: l.name,
       fields
     }));
     res.status(httpStatus.OK);
