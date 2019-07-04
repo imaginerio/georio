@@ -13,7 +13,7 @@ const fields = {
  * tileJSON
  * @public
  */
-exports.tileJSON = async (req, res, next) => Layer.getLayers()
+exports.tileJSON = async (req, res, next) => Layer.getBaseLayers()
   .then((layers) => {
     const vector_layers = layers.map(l => ({ // eslint-disable-line camelcase
       id: l.name,

@@ -7,7 +7,7 @@ const { Layer } = require('@models');
  * tiles
  * @public
  */
-exports.tiles = async (req, res, next) => Layer.getLayers()
+exports.tiles = async (req, res, next) => Layer.getBaseLayers()
   .then((allLayers) => {
     const params = makeParams(req);
     const layers = allLayers.filter(l => l.minzoom <= params.z);
