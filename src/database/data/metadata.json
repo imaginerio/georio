@@ -1,0 +1,65 @@
+{
+  "boundariespoly": {
+    "minzoom": 9,
+    "base": true
+  },
+  "buildingspoly": {
+    "minzoom": 14,
+    "base": true
+  },
+  "groundcoverspoly": {
+    "minzoom": 9,
+    "base": true
+  },
+  "hidrographyline": {
+    "minzoom": 9,
+    "base": true
+  },
+  "hidrographypoly": {
+    "minzoom": 9,
+    "base": true
+  },
+  "openspacespoly": {
+    "minzoom": 12,
+    "base": true,
+    "types": {
+      "Park": 12,
+      "Square": 12,
+      "Field": 14,
+      "Golf Course": 14,
+      "Graveyard": 14,
+      "University Campus": 14,
+      "Dog Park": 14,
+      "Ice Rink": 14,
+      "Camp Site": 14
+    }
+  },
+  "roadsline": {
+    "minzoom": 9,
+    "base": true,
+    "types": {
+      "Bridleway": 13,
+      "Cycleway": 13,
+      "Motorway": 9,
+      "Pedestrian": 13,
+      "Primary": 9,
+      "Residential": 12,
+      "Secondary": 9,
+      "Service": 12,
+      "Steps": 13,
+      "Street": 13,
+      "Tertiary": 11,
+      "Track": 13,
+      "Trunk": 9,
+      "Unclassified": 13
+    }
+  },
+  "utilitiesline": {
+    "minzoom": 9,
+    "base": true
+  },
+  "waterworkspoly": {
+    "minzoom": 9,
+    "base": true
+  }
+}
