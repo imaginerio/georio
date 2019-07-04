@@ -10,8 +10,10 @@ const tileCacheMiddleware = (req, res, next) => {
   return Cache.check(params)
     .then((exists) => {
       if (exists) {
-        const { z, x, y } = req.params;
-        return res.redirect(`https://s3.amazonaws.com/tilecache.axismaps.io/highways-waterways/${z}/${x}/${y}.pbf`);
+        const {
+          z, x, y, firstyear, lastyear
+        } = req.params;
+        return res.redirect(`https://s3.amazonaws.com/tilecache.axismaps.io/highways-waterways/${firstyear}-${lastyear}/${z}/${x}/${y}.pbf`);
       }
       return next();
     });

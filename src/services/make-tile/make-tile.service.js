@@ -6,7 +6,7 @@ const { sequelize } = require('@models');
  */
 const makeTileService = (params, layer) => sequelize.query(
   `SELECT
-    ST_AsMVT(q, '${layer.name + layer.geometry}', 4096, 'geom')::BYTEA AS mvt
+    ST_AsMVT(q, '${layer.name}', 4096, 'geom')::BYTEA AS mvt
   FROM (
     SELECT
       f.id,
@@ -19,7 +19,7 @@ const makeTileService = (params, layer) => sequelize.query(
     INNER JOIN "Types" AS t ON "TypeId" = t.id
     INNER JOIN "Layers" AS l ON "LayerId" = l.id
     WHERE l.name = '${layer.name}'
-      AND COALESCE(t.minzoom, l.minzoom) <= ${params.z}
+      AND COALESCE(t.minzoom, l.minzoom, 14) <= ${params.z}
       AND firstyear <= ${params.firstyear}
       AND lastyear >= ${params.lastyear}
       AND geom_merc && TileBBox(${params.z}, ${params.x}, ${params.y}, 3857)
