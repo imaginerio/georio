@@ -14,5 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     attributes: ['id', 'name', 'geometry', 'minzoom']
   });
 
+  Layer.getLayer = name => Layer.findOne({
+    where: { name }
+  });
+
   return Layer;
 };

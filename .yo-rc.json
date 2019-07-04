@@ -8,10 +8,10 @@
     "author": "Axis Maps",
     "src": "src",
     "kind": "service",
-    "last_endpoint": "TileJSON",
-    "last_apidesc": "Returns TileJSON describing vector tiles",
+    "last_endpoint": "getExtent",
+    "last_apidesc": "Get extent of a given feature type or layer for a given year",
     "last_method": "get",
-    "last_service": "makeParams",
+    "last_service": "getExtents",
     "last_middleware": "tileCache"
   }
 }
