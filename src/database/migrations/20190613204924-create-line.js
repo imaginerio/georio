@@ -2,9 +2,8 @@ module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('lines', {
     id: {
       allowNull: false,
-      autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: Sequelize.STRING(8)
     },
     remoteId: {
       type: Sequelize.INTEGER
@@ -13,9 +12,11 @@ module.exports = {
       type: Sequelize.TEXT
     },
     firstyear: {
+      allowNull: false,
       type: Sequelize.INTEGER
     },
     lastyear: {
+      allowNull: false,
       type: Sequelize.INTEGER
     },
     firstdate: {
@@ -34,9 +35,11 @@ module.exports = {
       onDelete: 'CASCADE'
     },
     geom: {
+      allowNull: false,
       type: Sequelize.GEOMETRY('MULTILINESTRING', 4326)
     },
     geom_merc: {
+      allowNull: false,
       type: Sequelize.GEOMETRY('MULTILINESTRING', 3857)
     },
     createdAt: {
