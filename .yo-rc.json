@@ -8,10 +8,10 @@
     "author": "Axis Maps",
     "src": "src",
     "kind": "service",
-    "last_endpoint": "getExtent",
-    "last_apidesc": "Get extent of a given feature type or layer for a given year",
+    "last_endpoint": "layerTiles",
+    "last_apidesc": "Get MVT tiles for a given layer",
     "last_method": "get",
-    "last_service": "getExtents",
+    "last_service": "get Geojson",
     "last_middleware": "tileCache"
   }
 }

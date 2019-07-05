@@ -1,7 +1,7 @@
 const express = require('express');
 const validate = require('express-validation');
-const controller = require('./get-extent.controller');
-const validator = require('./get-extent.validator');
+const controller = require('./layer.controller');
+const validator = require('./layer.validator');
 
 const router = express.Router();
 
@@ -20,7 +20,7 @@ const router = express.Router();
  *
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
-router.route('/:layer/:type?')
-  .get(validate(validator.joiSchema), controller.getExtent);
+router.route('/:output/:name')
+  .get(validate(validator.joiSchema), controller.layer);
 
 module.exports = router;

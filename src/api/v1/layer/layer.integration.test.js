@@ -13,9 +13,9 @@ describe('POST /api/v1/getExtent', () => {
 
   afterEach(() => {});
 
-  it('should integrate api /getExtent', () => {
+  it('should integrate api /layer', () => {
     return request(app)
-      .get('/api/v1/getExtent/testExtentLayer/')
+      .get('/api/v1/layer/extent/testExtentLayer/')
       .send(body)
       .expect(httpStatus.OK)
       .then((res) => {

@@ -5,7 +5,9 @@ module.exports = {
   path: '/api/v1/getExtent',
   type: 'get',
   joiSchema: {
-    body: {},
+    params: {
+      output: Joi.string().allow('extent', 'geojson')
+    },
     response: {
       200: {
         description: 'OK',
