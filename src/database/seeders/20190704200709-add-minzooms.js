@@ -12,8 +12,10 @@ module.exports = {
       const records = [];
       layers.forEach((l) => {
         if (json[l.name]) {
-          const { minzoom, types, base } = json[l.name];
-          records.push(l.update({ minzoom, base }));
+          const {
+            minzoom, types, base, title
+          } = json[l.name];
+          records.push(l.update({ minzoom, base, title }));
           if (types) {
             l.Types.forEach((t) => {
               if (types[t.name]) {

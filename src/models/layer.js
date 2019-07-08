@@ -8,6 +8,7 @@ const { Op } = Sequelize;
 module.exports = (sequelize, DataTypes) => {
   const Layer = sequelize.define('Layer', {
     name: DataTypes.TEXT,
+    title: DataTypes.TEXT,
     geometry: DataTypes.STRING,
     minzoom: DataTypes.INTEGER,
     base: DataTypes.BOOLEAN

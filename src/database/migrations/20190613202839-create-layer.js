@@ -10,6 +10,9 @@ module.exports = {
       type: Sequelize.TEXT,
       allowNull: false
     },
+    title: {
+      type: Sequelize.TEXT
+    },
     geometry: {
       type: Sequelize.STRING,
       allowNull: false

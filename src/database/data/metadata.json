@@ -1,23 +1,28 @@
 {
   "boundariespolygon": {
     "minzoom": 9,
-    "base": true
+    "base": true,
+    "title": "Boundaries"
   },
   "buildingspolygon": {
     "minzoom": 14,
-    "base": true
+    "base": true,
+    "title": "Buildings"
   },
   "groundcoverspolygon": {
     "minzoom": 9,
-    "base": true
+    "base": true,
+    "title": "Ground Cover"
   },
   "hidrographyline": {
     "minzoom": 9,
-    "base": true
+    "base": true,
+    "title": "Hidrography"
   },
   "hidrographypolygon": {
     "minzoom": 9,
-    "base": true
+    "base": true,
+    "title": "Hidrography"
   },
   "openspacespolygon": {
     "minzoom": 12,
@@ -32,7 +37,8 @@
       "Dog Park": 14,
       "Ice Rink": 14,
       "Camp Site": 14
-    }
+    },
+    "title": "Open Spaces"
   },
   "roadsline": {
     "minzoom": 9,
@@ -52,14 +58,17 @@
       "Track": 13,
       "Trunk": 9,
       "Unclassified": 13
-    }
+    },
+    "title": "Roads"
   },
   "utilitiesline": {
     "minzoom": 9,
-    "base": true
+    "base": true,
+    "title": "Utilities"
   },
   "waterworkspolygon": {
     "minzoom": 9,
-    "base": true
+    "base": true,
+    "title": "Waterworks"
   }
 }

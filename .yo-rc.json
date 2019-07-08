@@ -8,8 +8,8 @@
     "author": "Axis Maps",
     "src": "src",
     "kind": "service",
-    "last_endpoint": "getStyle",
-    "last_apidesc": "Get Mapbox JSON styles",
+    "last_endpoint": "getLayers",
+    "last_apidesc": "Returns JSON with layers and types",
     "last_method": "get",
     "last_service": "get Geojson",
     "last_middleware": "tileCache"
