@@ -1,7 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Type = sequelize.define('Type', {
     name: DataTypes.TEXT,
-    style: DataTypes.JSON,
     minzoom: DataTypes.INTEGER
   }, {});
 
@@ -10,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     Type.hasMany(models.Point);
     Type.hasMany(models.Line);
     Type.hasMany(models.Polygon);
+    Type.hasMany(models.Style);
   };
 
   Type.getType = name => Type.findOne({

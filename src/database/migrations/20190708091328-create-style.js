@@ -1,22 +1,25 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('Types', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('Styles', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER
     },
-    name: {
-      type: Sequelize.TEXT
+    order: {
+      type: Sequelize.INTEGER
     },
-    LayerId: {
+    TypeId: {
       type: Sequelize.INTEGER,
       references: {
-        model: 'Layers',
+        model: 'Types',
         key: 'id'
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE'
+    },
+    style: {
+      type: Sequelize.JSON
     },
     createdAt: {
       allowNull: false,
@@ -27,5 +30,5 @@ module.exports = {
       type: Sequelize.DATE
     }
   }),
-  down: queryInterface => queryInterface.dropTable('Types')
+  down: queryInterface => queryInterface.dropTable('Styles')
 };

@@ -8,8 +8,8 @@
     "author": "Axis Maps",
     "src": "src",
     "kind": "service",
-    "last_endpoint": "layerTiles",
-    "last_apidesc": "Get MVT tiles for a given layer",
+    "last_endpoint": "getStyle",
+    "last_apidesc": "Get Mapbox JSON styles",
     "last_method": "get",
     "last_service": "get Geojson",
     "last_middleware": "tileCache"
