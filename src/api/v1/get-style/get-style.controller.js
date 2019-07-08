@@ -21,7 +21,7 @@ exports.getStyle = async (req, res, next) => {
     pitch: 0,
     sources: {
       composite: {
-        url: `http://${req.headers.host}/api/v1/tilejson/`,
+        url: `http://${req.headers.host}/api/v1/tilejson/?start=${params.firstyear}&end=${params.lastyear}`,
         type: 'vector'
       }
     },
