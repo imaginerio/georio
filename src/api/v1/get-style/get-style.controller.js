@@ -1,4 +1,5 @@
 const httpStatus = require('http-status');
+const makeParams = require('@services/make-params');
 const {
   Style, Type, Layer, Sequelize
 } = require('@models');
@@ -10,6 +11,7 @@ const { Op } = Sequelize;
  * @public
  */
 exports.getStyle = async (req, res, next) => {
+  const params = makeParams(req);
   const json = {
     version: 8,
     name: 'Highways & Waterways',
@@ -50,8 +52,8 @@ exports.getStyle = async (req, res, next) => {
       layer['source-layer'] = s.Type.Layer.name;
       layer.filter = [
         'all',
-        ['<=', 'firstyear', 2018],
-        ['>=', 'lastyear', 2018],
+        ['<=', 'firstyear', params.firstyear],
+        ['>=', 'lastyear', params.lastyear],
         ['==', 'type', s.Type.name]
       ];
       return layer;
