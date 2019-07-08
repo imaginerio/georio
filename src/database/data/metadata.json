@@ -1,13 +1,13 @@
 {
-  "boundariespoly": {
+  "boundariespolygon": {
     "minzoom": 9,
     "base": true
   },
-  "buildingspoly": {
+  "buildingspolygon": {
     "minzoom": 14,
     "base": true
   },
-  "groundcoverspoly": {
+  "groundcoverspolygon": {
     "minzoom": 9,
     "base": true
   },
@@ -15,11 +15,11 @@
     "minzoom": 9,
     "base": true
   },
-  "hidrographypoly": {
+  "hidrographypolygon": {
     "minzoom": 9,
     "base": true
   },
-  "openspacespoly": {
+  "openspacespolygon": {
     "minzoom": 12,
     "base": true,
     "types": {
@@ -58,7 +58,7 @@
     "minzoom": 9,
     "base": true
   },
-  "waterworkspoly": {
+  "waterworkspolygon": {
     "minzoom": 9,
     "base": true
   }

@@ -19,10 +19,12 @@ exports.getStyle = async (req, res, next) => {
     pitch: 0,
     sources: {
       composite: {
-        url: `http://${req.headers.host}/api/v1/tiles/{z}/{x}/{y}.pbf`,
+        url: `http://${req.headers.host}/api/v1/tilejson/`,
         type: 'vector'
       }
-    }
+    },
+    sprite: 'mapbox://sprites/axismaps/cjvmx96894g8h1cmrayjddslz/d54dto65po428e2qwof244z46',
+    glyphs: 'mapbox://fonts/axismaps/{fontstack}/{range}.pbf'
   };
 
   return Style.findAll({
@@ -31,7 +33,7 @@ exports.getStyle = async (req, res, next) => {
         [Op.ne]: null
       }
     },
-    attributes: ['style'],
+    attributes: ['id', 'style'],
     include: [{
       model: Type,
       attributes: ['name'],
@@ -43,14 +45,14 @@ exports.getStyle = async (req, res, next) => {
   }).then((styles) => {
     json.layers = styles.map((s) => {
       const layer = s.style;
-      layer.id = s.Type.name.replace(' ', '-').toLowerCase();
+      layer.id = `${s.Type.name.replace(' ', '-').toLowerCase()}${s.id}`;
       layer.source = 'composite';
       layer['source-layer'] = s.Type.Layer.name;
       layer.filter = [
         'all',
-        ['<=', ['get', 'FirstYear'], 2018],
-        ['>=', ['get', 'LastYear'], 2018],
-        ['match', ['get', 'Type'], ['County Limit'], true, false]
+        ['<=', 'firstyear', 2018],
+        ['>=', 'lastyear', 2018],
+        ['==', 'type', s.Type.name]
       ];
       return layer;
     });
