@@ -33,7 +33,7 @@ module.exports = {
     LANGUAGE SQL
     IMMUTABLE;
     
-  CREATE OR REPLACE FUNCTION getTileRange (firstyear INTEGER)
+  CREATE OR REPLACE FUNCTION getTileRange (firstyear INTEGER, totalFeatures INTEGER, additionalFeatures INTEGER)
     RETURNS NUMERIC AS
     $$
     DECLARE
@@ -50,7 +50,7 @@ module.exports = {
         lastyear := lastyear + i;
         i := i + 1;
         SELECT getFeatureCount(firstyear, lastyear) INTO featureCount;
-        EXIT WHEN featureCount >= 20000 AND featureCount - initialCount >= 10000;
+        EXIT WHEN featureCount >= totalFeatures AND featureCount - initialCount >= additionalFeatures;
       END LOOP;
       RETURN lastyear;
     END;

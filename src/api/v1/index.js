@@ -7,6 +7,7 @@ const tileJSONRoute = require('./tile-json');
 const layerRoute = require('./layer');
 const getStyleRoute = require('./get-style');
 const getLayersRoute = require('./get-layers');
+const getTimelineRoute = require('./get-timeline');
 
 
 router.use('/create-feature', createFeatureRoute);
@@ -15,6 +16,7 @@ router.use('/TileJSON', tileJSONRoute);
 router.use('/layer', layerRoute);
 router.use('/getStyle', getStyleRoute);
 router.use('/getLayers', getLayersRoute);
+router.use('/getTimeline', getTimelineRoute);
 
 
 module.exports = router;
