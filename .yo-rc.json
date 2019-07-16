@@ -8,8 +8,8 @@
     "author": "Axis Maps",
     "src": "src",
     "kind": "service",
-    "last_endpoint": "getTimeline",
-    "last_apidesc": "Returns JSON with available timeline dates and recommended tile ranges",
+    "last_endpoint": "getLegend",
+    "last_apidesc": "Returns layer and type hierarchy for all features for a given year",
     "last_method": "get",
     "last_service": "makeTilerange",
     "last_middleware": "tileCache"
