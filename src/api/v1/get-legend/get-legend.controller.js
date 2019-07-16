@@ -1,8 +1,9 @@
 const httpStatus = require('http-status');
 const {
-  Layer, Type, Point, Line, Polygon, Sequelize
+  Layer, Type, Point, Line, Polygon, Style, Sequelize
 } = require('@models');
 const makeParamsService = require('@services/make-params');
+const makeSwatchService = require('@services/make-swatch');
 
 const { Op } = Sequelize;
 const geoms = [Point, Line, Polygon];
@@ -35,14 +36,29 @@ exports.getLegend = async (req, res, next) => {
         attributes: ['name', ['name', 'title']],
         where: {
           id: types
-        }
+        },
+        include: [{
+          model: Style,
+          attributes: ['style']
+        }]
       }]
     }).then((layers) => {
+      const legend = layers.map((l) => {
+        const layer = l.dataValues;
+        layer.Types = layer.Types.map((t) => {
+          const type = t.dataValues;
+          type.swatch = makeSwatchService(type.Styles) || '#cccccc';
+          delete type.Styles;
+          return type;
+        });
+        return layer;
+      });
+
       res.status(httpStatus.OK);
       return res.json({
         responseCode: httpStatus.OK,
         responseMessage: 'OK',
-        response: { layers }
+        response: { legend }
       });
     });
   });

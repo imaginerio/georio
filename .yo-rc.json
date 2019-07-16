@@ -11,7 +11,7 @@
     "last_endpoint": "getLegend",
     "last_apidesc": "Returns layer and type hierarchy for all features for a given year",
     "last_method": "get",
-    "last_service": "makeTilerange",
+    "last_service": "makeSwatch",
     "last_middleware": "tileCache"
   }
 }
