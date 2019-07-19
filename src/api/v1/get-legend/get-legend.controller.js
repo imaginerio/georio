@@ -47,6 +47,7 @@ exports.getLegend = async (req, res, next) => {
         const layer = l.dataValues;
         layer.Types = layer.Types.map((t) => {
           const type = t.dataValues;
+          type.name = type.name.replace(' ', '-').toLowerCase();
           type.swatch = makeSwatchService(type.Styles) || '#cccccc';
           delete type.Styles;
           return type;
