@@ -9,6 +9,7 @@ const getStyleRoute = require('./get-style');
 const getLayersRoute = require('./get-layers');
 const getTimelineRoute = require('./get-timeline');
 const getLegendRoute = require('./get-legend');
+const nameSearchRoute = require('./name-search');
 
 
 router.use('/create-feature', createFeatureRoute);
@@ -19,6 +20,7 @@ router.use('/getStyle', getStyleRoute);
 router.use('/getLayers', getLayersRoute);
 router.use('/getTimeline', getTimelineRoute);
 router.use('/getLegend', getLegendRoute);
+router.use('/nameSearch', nameSearchRoute);
 
 
 module.exports = router;
