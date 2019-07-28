@@ -9,6 +9,9 @@ module.exports = {
     name: {
       type: Sequelize.TEXT
     },
+    title: {
+      type: Sequelize.TEXT
+    },
     LayerId: {
       type: Sequelize.INTEGER,
       references: {

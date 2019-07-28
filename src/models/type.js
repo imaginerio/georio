@@ -1,6 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Type = sequelize.define('Type', {
     name: DataTypes.TEXT,
+    title: DataTypes.TEXT,
     minzoom: DataTypes.INTEGER
   }, {});
 
