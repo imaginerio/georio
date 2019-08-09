@@ -2,20 +2,23 @@
 const request = require('supertest');
 const httpStatus = require('http-status');
 const app = require('@app');
-const newLayerService = require('@services/new-layer');
 
-describe('POST /api/v1/getExtent', () => {
+describe('POST /api/v1/layer', () => {
   let body;
 
   beforeEach(() => {
-    return newLayerService('testExtentLayer', 'polygon');
+    body = {
+      data: {
+        geometry: 'line'
+      }
+    };
   });
 
   afterEach(() => {});
 
   it('should integrate api /layer', () => {
     return request(app)
-      .get('/api/v1/layer/extent/testExtentLayer/')
+      .post('/api/v1/layer/create')
       .send(body)
       .expect(httpStatus.OK)
       .then((res) => {

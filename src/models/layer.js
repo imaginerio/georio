@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const { promisify } = require('util');
 const dbgeo = require('dbgeo');
+const uuid = require('uuid');
 
 const dbgeoAsync = promisify(dbgeo.parse);
 const { Op } = Sequelize;
@@ -82,9 +83,11 @@ module.exports = (sequelize, DataTypes) => {
     }));
   };
 
-  Layer.getLayer = name => Layer.findOne({
-    where: { name }
-  });
+  Layer.newLayer = (data) => {
+    const props = data;
+    props.id = uuid.v4();
+    return Layer.create(props).then(layer => layer.id);
+  };
 
   return Layer;
 };

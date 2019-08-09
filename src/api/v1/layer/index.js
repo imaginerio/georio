@@ -6,10 +6,10 @@ const validator = require('./layer.validator');
 const router = express.Router();
 
 /**
- * @api {get} api/v1/getExtent getExtent
- * @apiDescription Get extent of a given feature type or layer for a given year
+ * @api {post} api/v1/layer layer
+ * @apiDescription Create / modify / delete layer
  * @apiVersion 1.0.0
- * @apiName getExtent
+ * @apiName layer
  * @apiPermission public
  *
  * @apiParam  {String} [param]  Put some parameter schema here
@@ -20,7 +20,7 @@ const router = express.Router();
  *
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
-router.route('/:output/:name')
-  .get(validate(validator.joiSchema), controller.layer);
+router.route('/:action/')
+  .post(validate(validator.joiSchema), controller.layer);
 
 module.exports = router;

@@ -1,12 +1,16 @@
 const Joi = require('joi');
 
 module.exports = {
-  name: 'getExtent',
-  path: '/api/v1/getExtent',
-  type: 'get',
+  name: 'layer',
+  path: '/api/v1/layer',
+  type: 'post',
   joiSchema: {
     params: {
-      output: Joi.string().allow('extent', 'geojson')
+      action: Joi.string().valid('create', 'modify', 'delete')
+    },
+    body: {
+      layer: Joi.string(),
+      data: Joi.object().required()
     },
     response: {
       200: {

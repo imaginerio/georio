@@ -1,31 +1,31 @@
 const httpStatus = require('http-status');
 const { Layer } = require('@models/');
-// const getExtentsService = require('@services/get-extents');
-const makeParamsService = require('@services/make-params');
 
 /**
- * getExtent
+ * layer
  * @public
  */
+const create = async (id, data) => Layer.newLayer(data);
 
-exports.layer = async (req, res, next) => {
-  const params = makeParamsService(req);
-  return Layer.getLayer(params.name).then((layer) => {
-    if (layer) {
-      if (params.output === 'extent') {
-        return layer.getExtent(params).then((extents) => {
-          res.status(httpStatus.OK);
-          return res.json({
-            responseCode: httpStatus.OK,
-            responseMessage: 'OK',
-            response: { extents }
-          });
-        });
-      }
-      if (params.output === 'geojson') {
-        return layer.getGeoJSON(params).then(geojson => res.send(geojson));
-      }
-    }
-    return res.sendStatus(404);
+const modify = async (id, data) => Layer.updateLayer(id, data);
+
+const paths = { create, modify };
+
+exports.layer = async (req, res, next) => paths[req.params.action](req.body.layer, req.body.data)
+  .then((result) => {
+    res.status(httpStatus.OK);
+    return res.json({
+      responseCode: httpStatus.OK,
+      responseMessage: 'OK',
+      response: result
+    });
+  }).catch((e) => {
+    console.log(e);
+    console.log(req.body);
+    res.status(httpStatus.INTERNAL_SERVER_ERROR);
+    return res.json({
+      responseCode: httpStatus.INTERNAL_SERVER_ERROR,
+      responseMessage: 'ERROR',
+      response: e
+    });
   });
-};
