@@ -2,8 +2,8 @@ const uuid = require('uuid');
 
 module.exports = (sequelize, DataTypes) => {
   const Type = sequelize.define('Type', {
-    name: DataTypes.TEXT,
     title: DataTypes.TEXT,
+    remoteId: DataTypes.STRING,
     minzoom: DataTypes.INTEGER
   }, {});
 

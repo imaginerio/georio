@@ -30,10 +30,10 @@ exports.getLegend = async (req, res, next) => {
     const types = [];
     features.forEach(f => f.forEach(g => types.push(g.TypeId)));
     return Layer.findAll({
-      attributes: ['id', 'geometry', 'name', 'title', 'base'],
+      attributes: ['id', 'geometry', 'title', 'base'],
       include: [{
         model: Type,
-        attributes: ['name', ['name', 'title']],
+        attributes: ['id', 'title'],
         where: {
           id: types
         },
@@ -47,7 +47,6 @@ exports.getLegend = async (req, res, next) => {
         const layer = l.dataValues;
         layer.Types = layer.Types.map((t) => {
           const type = t.dataValues;
-          type.name = type.name.replace(' ', '-').toLowerCase();
           type.swatch = makeSwatchService(type.Styles) || '#cccccc';
           delete type.Styles;
           return type;

@@ -3,7 +3,7 @@ module.exports = {
     id: {
       allowNull: false,
       primaryKey: true,
-      type: Sequelize.STRING(8)
+      type: Sequelize.STRING
     },
     remoteId: {
       type: Sequelize.INTEGER
@@ -20,13 +20,13 @@ module.exports = {
       type: Sequelize.INTEGER
     },
     firstdate: {
-      type: Sequelize.DATE
+      type: Sequelize.DATEONLY
     },
     lastdate: {
-      type: Sequelize.DATE
+      type: Sequelize.DATEONLY
     },
     TypeId: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.UUID,
       references: {
         model: 'Types',
         key: 'id'

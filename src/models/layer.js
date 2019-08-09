@@ -8,8 +8,8 @@ const { Op } = Sequelize;
 
 module.exports = (sequelize, DataTypes) => {
   const Layer = sequelize.define('Layer', {
-    name: DataTypes.TEXT,
     title: DataTypes.TEXT,
+    remoteId: DataTypes.STRING,
     geometry: DataTypes.STRING,
     minzoom: DataTypes.INTEGER,
     base: DataTypes.BOOLEAN
@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   Layer.getBaseLayers = () => Layer.findAll({
-    attributes: ['id', 'name', 'geometry', 'minzoom'],
+    attributes: ['id', 'title', 'geometry', 'minzoom'],
     where: { base: true }
   });
 

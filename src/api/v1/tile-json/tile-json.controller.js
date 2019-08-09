@@ -5,7 +5,6 @@ const { Layer } = require('@models');
 const fields = {
   id: 'Number',
   type: 'String',
-  name: 'String',
   firstyear: 'Number',
   lastyear: 'Number'
 };
@@ -17,7 +16,8 @@ const fields = {
 exports.tileJSON = async (req, res, next) => Layer.getBaseLayers()
   .then((layers) => {
     const vector_layers = layers.map(l => ({ // eslint-disable-line camelcase
-      id: l.name,
+      id: l.id,
+      description: l.title,
       fields
     }));
     const params = makeParams(req);

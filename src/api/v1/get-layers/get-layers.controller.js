@@ -6,10 +6,10 @@ const { Layer, Type } = require('@models');
  * @public
  */
 exports.getLayers = async (req, res, next) => Layer.findAll({
-  attributes: ['title', 'name', 'geometry', 'base'],
+  attributes: ['title', 'id', 'geometry', 'base'],
   include: [{
     model: Type,
-    attributes: ['name']
+    attributes: ['id', 'title']
   }]
 }).then((layers) => {
   res.status(httpStatus.OK);

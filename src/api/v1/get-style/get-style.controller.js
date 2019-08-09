@@ -38,23 +38,23 @@ exports.getStyle = async (req, res, next) => {
     attributes: ['id', 'style'],
     include: [{
       model: Type,
-      attributes: ['name'],
+      attributes: ['id'],
       include: [{
         model: Layer,
-        attributes: ['name']
+        attributes: ['id']
       }]
     }]
   }).then((styles) => {
     json.layers = styles.map((s) => {
       const layer = s.style;
-      layer.id = `${s.Type.name.replace(' ', '-').toLowerCase()}${s.id}`;
+      layer.id = s.Type.id + s.id;
       layer.source = 'composite';
-      layer['source-layer'] = s.Type.Layer.name;
+      layer['source-layer'] = s.Type.Layer.id;
       layer.filter = [
         'all',
         ['<=', 'firstyear', params.firstyear],
         ['>=', 'lastyear', params.lastyear],
-        ['==', 'type', s.Type.name]
+        ['==', 'type', s.Type.id]
       ];
       return layer;
     });

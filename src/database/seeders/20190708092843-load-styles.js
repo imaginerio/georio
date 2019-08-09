@@ -12,20 +12,19 @@ module.exports = {
     const { layers } = JSON.parse(
       fs.readFileSync(path.join(__dirname, '../data/style.json'))
     );
-    let order = 0;
     const records = [];
-    layers.forEach((l) => {
+    layers.forEach((l, order) => {
       if (l.filter) {
         const typeFilter = l.filter.find(f => Array.isArray(f) && f[0] === 'match');
-        const name = typeFilter[2][0];
+        const title = typeFilter[2][0];
         records.push(
           Type.findOne({
-            where: { name },
+            where: { title },
             attributes: ['id'],
             include: [{
               model: Layer,
               where: {
-                name: {
+                remoteId: {
                   [Op.iLike]: `${l['source-layer']}%`
                 }
               }
@@ -44,7 +43,6 @@ module.exports = {
               });
           })
         );
-        order += 1;
       }
     });
     return Promise.all(records);

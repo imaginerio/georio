@@ -10,7 +10,7 @@ module.exports = {
       type: Sequelize.INTEGER
     },
     TypeId: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.UUID,
       references: {
         model: 'Types',
         key: 'id'

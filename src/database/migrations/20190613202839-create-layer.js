@@ -2,15 +2,13 @@ module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('Layers', {
     id: {
       allowNull: false,
-      autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
-    },
-    name: {
-      type: Sequelize.TEXT,
-      allowNull: false
+      type: Sequelize.UUID
     },
     title: {
+      type: Sequelize.TEXT
+    },
+    remoteId: {
       type: Sequelize.TEXT
     },
     geometry: {
