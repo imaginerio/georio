@@ -1,3 +1,5 @@
+const uuid = require('uuid');
+
 module.exports = (sequelize, DataTypes) => {
   const Type = sequelize.define('Type', {
     name: DataTypes.TEXT,
@@ -13,9 +15,12 @@ module.exports = (sequelize, DataTypes) => {
     Type.hasMany(models.Style);
   };
 
-  Type.getType = name => Type.findOne({
-    where: { name }
-  });
+  Type.newType = (layer, data) => {
+    const props = data;
+    props.id = uuid.v4();
+    props.LayerId = layer;
+    return Type.create(props).then(type => type.id);
+  };
 
   return Type;
 };
