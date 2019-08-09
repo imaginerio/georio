@@ -7,7 +7,7 @@ describe('Service - newFeature', () => {
   afterEach(() => {});
 
   it('should do unit test for ', () => {
-    return service('line', 'wkt', {
+    return service('line', 'wkt', '', {
       objectid: '26',
       name: ' ',
       layer: 'hidrography',

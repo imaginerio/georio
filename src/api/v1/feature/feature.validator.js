@@ -1,11 +1,20 @@
 const Joi = require('joi');
 
 module.exports = {
-  name: 'createFeature',
-  path: '/api/v1/createFeature',
+  name: 'feature',
+  path: '/api/v1/feature',
   type: 'post',
   joiSchema: {
-    body: {},
+    params: {
+      action: Joi.string().valid('create', 'modify', 'delete')
+    },
+    body: {
+      layer: Joi.string(),
+      type: Joi.string().required(),
+      dataType: Joi.string().valid('geojson', 'wkt'),
+      geometry: Joi.string().required().valid('point', 'line', 'polygon'),
+      data: Joi.object()
+    },
     response: {
       200: {
         description: 'OK',

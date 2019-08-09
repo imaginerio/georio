@@ -8,9 +8,9 @@
     "author": "Axis Maps",
     "src": "src",
     "kind": "service",
-    "last_endpoint": "nameSearch",
-    "last_apidesc": "Search by name across all base features",
-    "last_method": "get",
+    "last_endpoint": "feature",
+    "last_apidesc": "Create / modify / delete feature",
+    "last_method": "post",
     "last_service": "makeSwatch",
     "last_middleware": "tileCache"
   }
