@@ -11,6 +11,7 @@ const getLegendRoute = require('./get-legend');
 const searchRoute = require('./search');
 const typeRoute = require('./type');
 const featureRoute = require('./feature');
+const probeRoute = require('./probe');
 
 router.use('/tiles', tilesRoute);
 router.use('/TileJSON', tileJSONRoute);
@@ -22,6 +23,7 @@ router.use('/getLegend', getLegendRoute);
 router.use('/search', searchRoute);
 router.use('/type', typeRoute);
 router.use('/feature', featureRoute);
+router.use('/probe', probeRoute);
 
 
 module.exports = router;
