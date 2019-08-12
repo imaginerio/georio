@@ -1,8 +1,8 @@
 const Joi = require('joi');
 
 module.exports = {
-  name: 'nameSearch',
-  path: '/api/v1/nameSearch',
+  name: 'search',
+  path: '/api/v1/search',
   type: 'get',
   joiSchema: {
     params: {

@@ -1,10 +1,10 @@
 /* eslint-disable arrow-body-style */
 
-describe('Test nameSearch', () => {
+describe('Test search', () => {
   beforeEach(() => {});
 
   afterEach(() => {});
 
-  it('TODO: should do unit test for nameSearch', () => {
+  it('TODO: should do unit test for search', () => {
   });
 });

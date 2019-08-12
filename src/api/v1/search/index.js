@@ -1,15 +1,15 @@
 const express = require('express');
 const validate = require('express-validation');
-const controller = require('./name-search.controller');
-const validator = require('./name-search.validator');
+const controller = require('./search.controller');
+const validator = require('./search.validator');
 
 const router = express.Router();
 
 /**
- * @api {get} api/v1/nameSearch nameSearch
+ * @api {get} api/v1/search search
  * @apiDescription Search by name across all base features
  * @apiVersion 1.0.0
- * @apiName nameSearch
+ * @apiName search
  * @apiPermission public
  *
  * @apiParam  {String} [param]  Put some parameter schema here
@@ -21,6 +21,6 @@ const router = express.Router();
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
 router.route('/:string')
-  .get(validate(validator.joiSchema), controller.nameSearch);
+  .get(validate(validator.joiSchema), controller.search);
 
 module.exports = router;
