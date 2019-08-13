@@ -23,7 +23,11 @@ exports.probe = async (req, res, next) => {
   let geom = Sequelize.fn('ST_SetSRID', Sequelize.fn('ST_MakePoint', ...location), 4326);
   if (location.length === 4) geom = Sequelize.fn('ST_MakeEnvelope', ...location, 4326);
   const records = geoms.map(g => g.findAll({
-    attributes: ['id', 'name'],
+    attributes: [
+      'id',
+      'name',
+      [Sequelize.fn('ST_Envelope', Sequelize.col('geom')), 'bbox']
+    ],
     where: {
       geom: {
         [Op.overlap]: geom
@@ -60,6 +64,7 @@ exports.probe = async (req, res, next) => {
           response.push({
             id: f.id,
             name: f.name,
+            bbox: [f.bbox.coordinates[0][0], f.bbox.coordinates[0][2]],
             layer: f['Type.Layer.id']
           });
         }
