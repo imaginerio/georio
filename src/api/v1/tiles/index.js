@@ -21,7 +21,7 @@ const router = express.Router();
  *
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
-router.route('/:z/:x/:y.pbf')
+router.route('/:layer?/:z/:x/:y.pbf')
   .get(validate(validator.joiSchema), tileCacheMiddleware, controller.tiles);
 
 module.exports = router;

@@ -21,6 +21,9 @@ module.exports = {
     lastyear: {
       type: Sequelize.INTEGER
     },
+    layer: {
+      type: Sequelize.STRING
+    },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE

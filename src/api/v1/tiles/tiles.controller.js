@@ -7,19 +7,29 @@ const { Layer } = require('@models');
  * tiles
  * @public
  */
-exports.tiles = async (req, res, next) => Layer.getBaseLayers()
-  .then((allLayers) => {
-    const params = makeParams(req);
-    const layers = allLayers.filter(l => l.minzoom <= params.z);
-    const records = layers.map(l => tiles(params, l).then(tile => tile[0].mvt));
-    return Promise.all(records).then((mvts) => {
-      res.setHeader('Content-Type', 'application/x-protobuf');
-      if (mvts.length === 0) return res.sendStatus(204);
-      const pbf = Buffer.concat(mvts);
-      uploadTile(params, pbf);
-      return res.send(pbf);
-    }).catch((e) => {
-      console.log(e);
-      res.sendStatus(500);
+exports.tiles = async (req, res, next) => {
+  let allLayers = [];
+  if (req.params.layer) {
+    allLayers = await Layer.findAll({
+      attributes: ['id', 'title', 'geometry', 'minzoom'],
+      where: {
+        id: req.params.layer
+      }
     });
+  } else {
+    allLayers = await Layer.getBaseLayers();
+  }
+  const params = makeParams(req);
+  const layers = allLayers.filter(l => l.minzoom <= params.z);
+  const records = layers.map(l => tiles(params, l).then(tile => tile[0].mvt));
+  return Promise.all(records).then((mvts) => {
+    res.setHeader('Content-Type', 'application/x-protobuf');
+    if (mvts.length === 0) return res.sendStatus(204);
+    const pbf = Buffer.concat(mvts);
+    uploadTile(params, pbf);
+    return res.send(pbf);
+  }).catch((e) => {
+    console.log(e);
+    res.sendStatus(500);
   });
+};

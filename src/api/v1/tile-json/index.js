@@ -20,7 +20,7 @@ const router = express.Router();
  *
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
-router.route('/')
+router.route('/:layer?')
   .get(validate(validator.joiSchema), controller.tileJSON);
 
 module.exports = router;

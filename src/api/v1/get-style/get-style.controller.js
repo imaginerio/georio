@@ -29,37 +29,52 @@ exports.getStyle = async (req, res, next) => {
     glyphs: 'mapbox://fonts/axismaps/{fontstack}/{range}.pbf'
   };
 
-  return Style.findAll({
+  return Layer.findAll({
+    attributes: ['id'],
     where: {
-      TypeId: {
-        [Op.ne]: null
-      }
-    },
-    attributes: ['id', 'style'],
-    include: [{
-      model: Type,
-      attributes: ['id'],
-      include: [{
-        model: Layer,
-        attributes: ['id']
-      }]
-    }]
-  }).then((styles) => {
-    json.layers = styles.map((s) => {
-      const layer = s.style;
-      layer.id = s.Type.id + s.id;
-      layer.source = 'composite';
-      layer['source-layer'] = s.Type.Layer.id;
-      layer.filter = [
-        'all',
-        ['<=', 'firstyear', params.firstyear],
-        ['>=', 'lastyear', params.lastyear],
-        ['==', 'type', s.Type.id]
-      ];
-      return layer;
+      base: false
+    }
+  }).then((layers) => {
+    layers.forEach((l) => {
+      const { id } = l;
+      json.sources[id] = {
+        url: `http://${req.headers.host}/api/v1/tilejson/${id}/?start=${params.firstyear}&end=${params.lastyear}`,
+        type: 'vector'
+      };
     });
 
-    res.status(httpStatus.OK);
-    return res.json(json);
+    return Style.findAll({
+      where: {
+        TypeId: {
+          [Op.ne]: null
+        }
+      },
+      attributes: ['id', 'style'],
+      include: [{
+        model: Type,
+        attributes: ['id'],
+        include: [{
+          model: Layer,
+          attributes: ['id']
+        }]
+      }]
+    }).then((styles) => {
+      json.layers = styles.map((s) => {
+        const layer = s.style;
+        layer.id = s.Type.id + s.id;
+        layer.source = 'composite';
+        layer['source-layer'] = s.Type.Layer.id;
+        layer.filter = [
+          'all',
+          ['<=', 'firstyear', params.firstyear],
+          ['>=', 'lastyear', params.lastyear],
+          ['==', 'type', s.Type.id]
+        ];
+        return layer;
+      });
+
+      res.status(httpStatus.OK);
+      return res.json(json);
+    });
   });
 };
