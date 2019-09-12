@@ -1,11 +1,10 @@
 version: "2"
 services: 
-  postgres:
-    image: mdillon/postgis
-    environment:
-      - POSTGRES_DB=georio-store
-      - POSTGRES_USER=username
-      - POSTGRES_PASSWORD=Dummy123
+  db:
+    image: geographica/postgis:dev_diplodocus
+    volumes:
+      - ./db-data:/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports: 
       - "9000:5432"
   
@@ -14,9 +13,9 @@ services:
     volumes: 
       - .:/app
     links: 
-      - postgres
+      - db
     depends_on: 
-      - postgres
+      - db
 
   georio:
     build: .
@@ -27,4 +26,4 @@ services:
     depends_on: 
       - migrations
     links: 
-      - postgres
+      - db
