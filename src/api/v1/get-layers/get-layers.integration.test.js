@@ -3,7 +3,7 @@ const request = require('supertest');
 const httpStatus = require('http-status');
 const app = require('@app');
 
-describe('POST /api/v1/getLayers', () => {
+describe('POST /api/v1/get/layers', () => {
   let body;
 
   beforeEach(() => {
@@ -12,9 +12,9 @@ describe('POST /api/v1/getLayers', () => {
 
   afterEach(() => {});
 
-  it('should integrate api /getLayers', () => {
+  it('should integrate api /get/layers', () => {
     return request(app)
-      .get('/api/v1/getLayers')
+      .get('/api/v1/get/layers')
       .send(body)
       .expect(httpStatus.OK)
       .then((res) => {

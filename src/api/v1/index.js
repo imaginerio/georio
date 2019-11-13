@@ -17,7 +17,7 @@ router.use('/tiles', tilesRoute);
 router.use('/TileJSON', tileJSONRoute);
 router.use('/layer', layerRoute);
 router.use('/getStyle', getStyleRoute);
-router.use('/getLayers', getLayersRoute);
+router.use('/get/layers', getLayersRoute);
 router.use('/getTimeline', getTimelineRoute);
 router.use('/getLegend', getLegendRoute);
 router.use('/search', searchRoute);
