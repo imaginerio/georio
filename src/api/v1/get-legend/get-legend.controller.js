@@ -1,9 +1,9 @@
 const httpStatus = require('http-status');
+const makeParamsService = require('@services/make-params');
+const makeSwatchService = require('@services/make-swatch');
 const {
   Layer, Type, Point, Line, Polygon, Style, Sequelize
 } = require('@models');
-const makeParamsService = require('@services/make-params');
-const makeSwatchService = require('@services/make-swatch');
 
 const { Op } = Sequelize;
 const geoms = [Point, Line, Polygon];

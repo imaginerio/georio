@@ -5,8 +5,8 @@ const methodOverride = require('method-override');
 const cors = require('cors');
 const helmet = require('helmet');
 // const interceptor = require('express-interceptor');
-const api = require('@api');
 const { errorMiddleware } = require('@middlewares/error');
+const api = require('@api');
 // const middlewareMonitoring = require('@middlewares/monitoring');
 
 /**
