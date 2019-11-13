@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const compress = require('compression');
 const methodOverride = require('method-override');
@@ -62,6 +63,9 @@ app.use('/', healthRoute);
 
 // mount api routes
 app.use('/api', api);
+
+// docs route
+app.use('/docs', express.static(path.join(__dirname, '../../docs')));
 
 // if error is not an instanceOf APIError, convert it.
 app.use(errorMiddleware.converter);
