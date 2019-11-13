@@ -17,7 +17,7 @@
     "dev": "NODE_ENV=development nodemon ./src/index.js",
     "lint": "eslint '**/*.js' --ignore-path .gitignore --ignore-pattern internals/scripts",
     "lint:fix": "yarn lint -- --fix",
-    "test": "cross-env NODE_ENV=test jest --forceExit --detectOpenHandles --coverage --coverageDirectory=coverage",
+    "test": "yarn db:migrate:test && cross-env NODE_ENV=test jest --forceExit --detectOpenHandles --coverage --coverageDirectory=coverage",
     "test:unit": "cross-env NODE_ENV=test jest --forceExit --detectOpenHandles --testPathPattern=\"(/src/.*)\\.(spec).js$\"",
     "test:integration": "cross-env NODE_ENV=test jest --forceExit --detectOpenHandles --testPathPattern=\"(/src/.*)\\.(test).js$\"",
     "validate": "yarn lint && yarn test",
