@@ -6,14 +6,7 @@ const newFeature = require('@services/new-feature');
  * @public
  */
 
-const create = async (req) => {
-  if (!req.body.dataType || !req.body.type) return null;
-  return newFeature(req.body.geometry, req.body.dataType, req.body.type, req.body.data);
-};
-
-const paths = { create };
-
-exports.feature = async (req, res, next) => paths[req.params.action](req)
+exports.feature = async (req, res, next) => newFeature(req.body)
   .then((result) => {
     res.status(httpStatus.OK);
     return res.json({
@@ -22,12 +15,11 @@ exports.feature = async (req, res, next) => paths[req.params.action](req)
       response: result
     });
   }).catch((e) => {
-    console.log(e);
     console.log(req.body);
     res.status(httpStatus.INTERNAL_SERVER_ERROR);
     return res.json({
       responseCode: httpStatus.INTERNAL_SERVER_ERROR,
       responseMessage: 'ERROR',
-      response: e
+      response: e.message
     });
   });

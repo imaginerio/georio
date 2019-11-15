@@ -10,7 +10,7 @@ const getTimelineRoute = require('./get-timeline');
 const getLegendRoute = require('./get-legend');
 const searchRoute = require('./search');
 const typeRoute = require('./type');
-const featureRoute = require('./feature');
+const featureRoute = require('./make-feature');
 const probeRoute = require('./probe');
 
 router.use('/tiles', tilesRoute);
@@ -22,7 +22,7 @@ router.use('/getTimeline', getTimelineRoute);
 router.use('/getLegend', getLegendRoute);
 router.use('/search', searchRoute);
 router.use('/type', typeRoute);
-router.use('/feature', featureRoute);
+router.use('/make/feature', featureRoute);
 router.use('/probe', probeRoute);
 
 

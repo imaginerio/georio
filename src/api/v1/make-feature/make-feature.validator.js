@@ -5,11 +5,7 @@ module.exports = {
   path: '/api/v1/feature',
   type: 'post',
   joiSchema: {
-    params: {
-      action: Joi.string().valid('create', 'modify', 'delete')
-    },
     body: {
-      layer: Joi.string(),
       type: Joi.string().required(),
       dataType: Joi.string().valid('geojson', 'wkt'),
       geometry: Joi.string().required().valid('point', 'line', 'polygon'),
