@@ -8,10 +8,11 @@
     "author": "Axis Maps",
     "src": "src",
     "kind": "service",
-    "last_endpoint": "feature",
-    "last_apidesc": "Create / modify / delete feature",
-    "last_method": "post",
+    "last_endpoint": "getFeatures",
+    "last_apidesc": "Get features as GeoJSON for a given layer",
+    "last_method": "get",
     "last_service": "makeSwatch",
-    "last_middleware": "tileCache"
+    "last_middleware": "tileCache",
+    "last_util": "geojson-transformer"
   }
 }

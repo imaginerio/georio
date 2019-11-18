@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     where: { base: true }
   });
 
-  Layer.prototype.getGeo = function (params, attributes) { // eslint-disable-line func-names
+  Layer.prototype.getGeo = function (params = {}, attributes) { // eslint-disable-line func-names
     const {
       Point, Line, Polygon, Type
     } = sequelize.models;
@@ -35,18 +35,15 @@ module.exports = (sequelize, DataTypes) => {
       polygon: Polygon
     };
     const { firstyear, lastyear } = params;
+    const where = {};
+    if (firstyear) where.firstyear = { [Op.lte]: firstyear };
+    if (lastyear) where.lastyear = { [Op.gte]: lastyear };
+
     const { id, geometry } = this;
     const model = geoms[geometry];
-    return model.findAll({
+    return model.findAllWithStream({
       attributes,
-      where: {
-        firstyear: {
-          [Op.lte]: firstyear
-        },
-        lastyear: {
-          [Op.gte]: lastyear
-        }
-      },
+      where,
       include: [{
         model: Type,
         attributes: [],
@@ -56,8 +53,7 @@ module.exports = (sequelize, DataTypes) => {
           attributes: [],
           where: { id }
         }]
-      }],
-      raw: true
+      }]
     });
   };
 
