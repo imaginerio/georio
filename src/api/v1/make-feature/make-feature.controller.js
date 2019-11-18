@@ -15,7 +15,6 @@ exports.feature = async (req, res, next) => newFeature(req.body)
       response: result
     });
   }).catch((e) => {
-    console.log(req.body);
     res.status(httpStatus.INTERNAL_SERVER_ERROR);
     return res.json({
       responseCode: httpStatus.INTERNAL_SERVER_ERROR,

@@ -14,7 +14,6 @@ describe('POST /api/v1/make/feature', () => {
           type,
           geometry: 'line',
           data: {
-            id: 'b76312a74fb9f430b921f06fee4a',
             type: 'Feature',
             properties: {
               firstyear: 1980,
