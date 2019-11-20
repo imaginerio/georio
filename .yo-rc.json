@@ -8,9 +8,9 @@
     "author": "Axis Maps",
     "src": "src",
     "kind": "service",
-    "last_endpoint": "getFeatures",
-    "last_apidesc": "Get features as GeoJSON for a given layer",
-    "last_method": "get",
+    "last_endpoint": "make-layer",
+    "last_apidesc": "Create a layer with a given name and geometry",
+    "last_method": "post",
     "last_service": "makeSwatch",
     "last_middleware": "tileCache",
     "last_util": "geojson-transformer"
