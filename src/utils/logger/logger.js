@@ -1,5 +1,4 @@
 const winston = require('winston');
-const WinstonCloudWatch = require('winston-cloudwatch');
 const sanitizer = require('node-sanitizer');
 // Uncomment the following line if you use elastic APM
 // const apm = require('elastic-apm-node');
@@ -25,18 +24,7 @@ const options = {
   }
 };
 
-const transports = [
-  new winston.transports.Console(options.console),
-  new WinstonCloudWatch({
-    logGroupName: serviceName,
-    logStreamName: process.env.NODE_ENV,
-    createLogGroup: true,
-    createLogStream: true,
-    handleExceptions: true,
-    jsonMessage: true,
-    awsRegion: process.env.AWS_DEFAULT_REGION
-  })
-];
+const transports = [new winston.transports.Console(options.console)];
 
 // instantiate a new Winston Logger with the settings defined above
 const logger = winston.loggers.add(process.env.NODE_ENV, {
