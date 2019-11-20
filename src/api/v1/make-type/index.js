@@ -1,15 +1,15 @@
 const express = require('express');
 const validate = require('express-validation');
-const controller = require('./type.controller');
-const validator = require('./type.validator');
+const controller = require('./make-type.controller');
+const validator = require('./make-type.validator');
 
 const router = express.Router();
 
 /**
- * @api {post} api/v1/type type
- * @apiDescription Create / modify / delete feature type
+ * @api {post} api/v1/makeType makeType
+ * @apiDescription Create a feature type for a given layer and title
  * @apiVersion 1.0.0
- * @apiName type
+ * @apiName makeType
  * @apiPermission public
  *
  * @apiParam  {String} [param]  Put some parameter schema here
@@ -20,7 +20,7 @@ const router = express.Router();
  *
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
-router.route('/:action/')
-  .post(validate(validator.joiSchema), controller.type);
+router.route('/:layer')
+  .post(validate(validator.joiSchema), controller.makeType);
 
 module.exports = router;

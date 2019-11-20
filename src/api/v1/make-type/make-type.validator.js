@@ -1,18 +1,11 @@
 const Joi = require('joi');
 
 module.exports = {
-  name: 'type',
-  path: '/api/v1/type',
+  name: 'makeType',
+  path: '/api/v1/makeType',
   type: 'post',
   joiSchema: {
-    params: {
-      action: Joi.string().valid('create', 'modify', 'delete')
-    },
-    body: {
-      layer: Joi.string().required(),
-      type: Joi.string(),
-      data: Joi.object()
-    },
+    body: {},
     response: {
       200: {
         description: 'OK',

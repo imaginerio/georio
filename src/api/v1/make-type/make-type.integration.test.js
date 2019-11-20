@@ -4,22 +4,23 @@ const httpStatus = require('http-status');
 const app = require('@app');
 const { Layer } = require('@models/');
 
-describe('POST /api/v1/type', () => {
+describe('POST /api/v1/make/type', () => {
   let body;
+  let layerId;
 
-  beforeEach(() => Layer.newLayer({ geometry: 'line' }).then((layer) => {
-    body = {
-      layer,
-      data: {}
-    };
+  beforeEach(() => Layer.newLayer({
+    geometry: 'point',
+    title: 'Test layer'
+  }).then((layer) => {
+    layerId = layer;
+    body = { title: 'Test type' };
   }));
 
   afterEach(() => {});
 
-  it('should integrate api /type', () => {
-    console.log(body);
+  it('should integrate api /make/type', () => {
     return request(app)
-      .post('/api/v1/type/create')
+      .post(`/api/v1/make/type/${layerId}`)
       .send(body)
       .expect(httpStatus.OK)
       .then((res) => {

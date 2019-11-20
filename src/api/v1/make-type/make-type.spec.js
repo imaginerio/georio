@@ -1,10 +1,10 @@
 /* eslint-disable arrow-body-style */
 
-describe('Test type', () => {
+describe('Test makeType', () => {
   beforeEach(() => {});
 
   afterEach(() => {});
 
-  it('TODO: should do unit test for type', () => {
+  it('TODO: should do unit test for makeType', () => {
   });
 });
