@@ -52,7 +52,7 @@ services:
       - certbot-var:/var/lib/letsencrypt
     depends_on:
       - webserver
-    command: certonly --webroot --webroot-path=/app/public --email info@axismaps.com --agree-tos --no-eff-email --staging -d beirut.georio.levantcarta.org  -d beirut.georio.levantcarta.org
+    command: certonly --webroot --webroot-path=/app/public --email info@axismaps.com --agree-tos --no-eff-email -d beirut.georio.levantcarta.org
 
 volumes:
   certbot-etc:
