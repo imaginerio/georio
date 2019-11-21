@@ -28,8 +28,8 @@ module.exports = (sequelize, DataTypes) => {
       INNER JOIN "Layers" AS l ON "LayerId" = l.id
       WHERE l.id = '${layer.id}'
         AND COALESCE(t.minzoom, l.minzoom, 14) <= ${params.z}
-        AND firstyear <= ${params.firstyear}
-        AND lastyear >= ${params.lastyear}
+        AND firstyear <= ${params.lastyear}
+        AND lastyear >= ${params.firstyear}
         AND geom_merc && TileBBox(${params.z}, ${params.x}, ${params.y}, 3857)
     ) AS q WHERE geom IS NOT NULL`,
     { type: sequelize.QueryTypes.SELECT }
@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
     const p = params;
     p.mvt = tile[0].mvt;
     p.LayerId = layer.id;
-    return Tile.create(p);
+    return Tile.upsert(p);
   });
 
   Tile.getTile = (params, layer) => {

@@ -41,6 +41,9 @@ module.exports = {
       allowNull: false,
       type: Sequelize.DATE
     }
-  }),
+  }).then(() => queryInterface.addIndex('Tiles', {
+    unique: true,
+    fields: ['z', 'x', 'y', 'firstyear', 'lastyear', 'LayerId']
+  })),
   down: queryInterface => queryInterface.dropTable('Tiles')
 };
