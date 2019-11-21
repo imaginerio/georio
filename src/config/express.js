@@ -67,6 +67,9 @@ app.use('/api', api);
 // docs route
 app.use('/docs', express.static(path.join(__dirname, '../../docs')));
 
+// public route
+app.use('/', express.static(path.join(__dirname, '../../public')));
+
 // if error is not an instanceOf APIError, convert it.
 app.use(errorMiddleware.converter);
 
