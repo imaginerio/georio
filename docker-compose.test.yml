@@ -7,7 +7,6 @@ services:
       - AWS_DEFAULT_REGION=us-east-1
       - DB_URL=postgres://postgres:postgres@db/postgres
       - DB_URL_TEST=postgres://username:Dummy123@postgres/georio-store
-    command: yarn db:migrate
   
   georio: 
     environment:
@@ -16,4 +15,4 @@ services:
       - AWS_DEFAULT_REGION=us-east-1
       - DB_URL=postgres://postgres:postgres@db/postgres
       - DB_URL_TEST=postgres://username:Dummy123@postgres/georio-store 
-    command: yarn test
+    command: ["./bin/wait-for-end.sh", "migrations", "yarn", "test"]

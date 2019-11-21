@@ -9,9 +9,9 @@ services:
       - NODE_ENV=production
       - PORT=5000
       - AWS_DEFAULT_REGION=us-east-1
+      - POSTGRES_PASSWORD=postgres
       - DB_URL=postgres://postgres:postgres@db/postgres
       - DB_URL_TEST=postgres://username:Dummy123@postgres/georio-store
-    command: yarn db:migrate
     networks: 
       - db-network
   
@@ -23,7 +23,7 @@ services:
       - HOST=beirut.georio.levantcarta.org
       - DB_URL=postgres://postgres:postgres@db/postgres
       - DB_URL_TEST=postgres://username:Dummy123@postgres/georio-store 
-    command: yarn docker:start
+    command: ["./bin/wait-for-end.sh", "migrations", "yarn", "docker:start"]
     networks:
       - app-network
       - db-network

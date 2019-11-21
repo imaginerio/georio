@@ -16,6 +16,7 @@ services:
       - db
     depends_on: 
       - db
+    command: ["./bin/wait-for-db.sh", "db", "yarn", "db:migrate"]
 
   georio:
     build: .
@@ -36,4 +37,4 @@ services:
       - migrations
     links: 
       - db
-    command: node bin/tile-cache.js
+    command: ["./bin/wait-for-end.sh", "migrations", "node", "bin/tile-cache.js"]
