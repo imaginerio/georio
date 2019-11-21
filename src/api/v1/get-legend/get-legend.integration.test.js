@@ -3,7 +3,7 @@ const request = require('supertest');
 const httpStatus = require('http-status');
 const app = require('@app');
 
-describe('POST /api/v1/getLegend', () => {
+describe('POST /api/v1/get/legend', () => {
   let body;
 
   beforeEach(() => {
@@ -12,9 +12,9 @@ describe('POST /api/v1/getLegend', () => {
 
   afterEach(() => {});
 
-  it('should integrate api /getLegend', () => {
+  it('should integrate api /get/legend', () => {
     return request(app)
-      .get('/api/v1/getLegend')
+      .get('/api/v1/get/legend')
       .send(body)
       .expect(httpStatus.OK)
       .then((res) => {

@@ -3,7 +3,7 @@ const request = require('supertest');
 const httpStatus = require('http-status');
 const app = require('@app');
 
-describe('POST /api/v1/getTimeline', () => {
+describe('POST /api/v1/get/timeline', () => {
   let body;
 
   beforeEach(() => {
@@ -12,9 +12,9 @@ describe('POST /api/v1/getTimeline', () => {
 
   afterEach(() => {});
 
-  it('should integrate api /getTimeline', () => {
+  it('should integrate api /get/timeline', () => {
     return request(app)
-      .get('/api/v1/getTimeline')
+      .get('/api/v1/get/timeline')
       .send(body)
       .expect(httpStatus.OK)
       .then((res) => {

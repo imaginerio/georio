@@ -6,7 +6,7 @@ const validator = require('./get-layers.validator');
 const router = express.Router();
 
 /**
- * @api {get} api/v1/get/layers get-layers
+ * @api {get} api/v1/get/layers getLayers
  * @apiDescription Returns JSON with layers and types
  * @apiVersion 1.0.0
  * @apiName Get Layers

@@ -6,17 +6,19 @@ const validator = require('./make-feature.validator');
 const router = express.Router();
 
 /**
- * @api {post} api/v1/make/feature make-feature
+ * @api {post} api/v1/make/feature makeFeature
  * @apiDescription Create / modify / delete feature
  * @apiVersion 1.0.0
  * @apiName make-feature
  * @apiPermission public
- * @apiGroup make
+ * @apiGroup MAKE
  *
  * @apiParam  {String} type Feature type UUID
  * @apiParam  {String} geometry Geometry type (point / line / polygon)
  * @apiParam  {String} [dataType=geojson] File type for geographic data (geojson / wkt)
- * @apiParam  {Object} data GeoJSON or WKT object containing geographic data and properties (must include 'firstyear' and 'lastyear')
+ * @apiParam  {Object} data Object containing geographic data and properties
+ * @apiParam  {Object} data[properties] Feature attributes. Must include 'firstyear' and 'lastyear' and can include 'name' and 'tags'
+ * @apiParam  {Object} data[geometry] GeoJSON or WKT object containing geographic data
  *
  * @apiSuccess {Number} responseCode     HTTP Response Code
  * @apiSuccess {String} responseMessage  Response message

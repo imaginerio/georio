@@ -6,17 +6,19 @@ const validator = require('./make-layer.validator');
 const router = express.Router();
 
 /**
- * @api {post} api/v1/makeLayer makeLayer
- * @apiDescription Create a layer with a given name and geometry
+ * @api {post} api/v1/make/layer makeLayer
+ * @apiDescription Create a layer with a given name and geometry and return the UUID for the new layer
  * @apiVersion 1.0.0
  * @apiName makeLayer
  * @apiPermission public
+ * @apiGroup MAKE
  *
- * @apiParam  {String} [param]  Put some parameter schema here
+ * @apiParam  {String="point","line","polygon"} geometry  Geometry type for layer
+ * @apiParam  {String}  title Layer title
  *
  * @apiSuccess {Number} responseCode     HTTP Response Code
  * @apiSuccess {String} responseMessage  Response message
- * @apiSuccess {Object} response         Response object
+ * @apiSuccess {Object} response         Layer UUID
  *
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */

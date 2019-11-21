@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 module.exports = {
   name: 'getStyle',
-  path: '/api/v1/getStyle',
+  path: '/api/v1/get/style',
   type: 'get',
   joiSchema: {
     body: {},

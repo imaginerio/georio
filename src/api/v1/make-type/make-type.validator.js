@@ -2,10 +2,12 @@ const Joi = require('joi');
 
 module.exports = {
   name: 'makeType',
-  path: '/api/v1/makeType',
+  path: '/api/v1/make/type',
   type: 'post',
   joiSchema: {
-    body: {},
+    body: {
+      title: Joi.string().required()
+    },
     response: {
       200: {
         description: 'OK',

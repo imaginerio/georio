@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 module.exports = {
   name: 'getLegend',
-  path: '/api/v1/getLegend',
+  path: '/api/v1/get/legend',
   type: 'get',
   joiSchema: {
     body: {},

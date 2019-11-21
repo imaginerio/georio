@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 module.exports = {
   name: 'getTimeline',
-  path: '/api/v1/getTimeline',
+  path: '/api/v1/get/timeline',
   type: 'get',
   joiSchema: {
     body: {},
