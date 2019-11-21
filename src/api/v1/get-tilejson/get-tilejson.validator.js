@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 module.exports = {
   name: 'tileJSON',
-  path: '/api/v1/tileJSON',
+  path: '/api/v1/get/tilejson',
   type: 'get',
   joiSchema: {
     body: {},

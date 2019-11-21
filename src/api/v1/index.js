@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 const tilesRoute = require('./tiles');
-const tileJSONRoute = require('./tile-json');
+const tileJSONRoute = require('./get-tilejson');
 const getStyleRoute = require('./get-style');
 const getLayersRoute = require('./get-layers');
 const getTimelineRoute = require('./get-timeline');
@@ -15,7 +15,7 @@ const makeLayerRoute = require('./make-layer');
 const makeTypeRoute = require('./make-type');
 
 router.use('/tiles', tilesRoute);
-router.use('/TileJSON', tileJSONRoute);
+router.use('/get/tilejson', tileJSONRoute);
 router.use('/get/style', getStyleRoute);
 router.use('/get/layers', getLayersRoute);
 router.use('/get/timeline', getTimelineRoute);

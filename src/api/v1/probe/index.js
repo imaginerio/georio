@@ -11,6 +11,7 @@ const router = express.Router();
  * @apiVersion 1.0.0
  * @apiName probe
  * @apiPermission public
+ * @apiGroup MAP
  *
  * @apiParam  {String} [param]  Put some parameter schema here
  *

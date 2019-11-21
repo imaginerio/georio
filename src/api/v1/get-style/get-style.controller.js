@@ -21,7 +21,7 @@ exports.getStyle = async (req, res, next) => {
     pitch: 0,
     sources: {
       composite: {
-        url: `http://${req.headers.host}/api/v1/tilejson/?start=${params.firstyear}&end=${params.lastyear}`,
+        url: `http://${req.headers.host}/api/v1/get/tilejson/?start=${params.firstyear}&end=${params.lastyear}`,
         type: 'vector'
       }
     },
@@ -38,7 +38,7 @@ exports.getStyle = async (req, res, next) => {
     layers.forEach((l) => {
       const { id } = l;
       json.sources[id] = {
-        url: `http://${req.headers.host}/api/v1/tilejson/${id}/?start=${params.firstyear}&end=${params.lastyear}`,
+        url: `http://${req.headers.host}/api/v1/get/tilejson/${id}/?start=${params.firstyear}&end=${params.lastyear}`,
         type: 'vector'
       };
     });
