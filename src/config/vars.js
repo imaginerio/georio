@@ -9,6 +9,7 @@ require('dotenv-safe').load({
 module.exports = {
   env: process.env.NODE_ENV,
   port: process.env.PORT,
+  host: process.env.HOST,
   serviceName: 'georio',
   http: {
     timeout: 5000,

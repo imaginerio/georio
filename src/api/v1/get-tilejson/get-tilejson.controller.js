@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
 const makeParams = require('@services/make-params');
+const { host } = require('@config/vars');
 const { Layer } = require('@models');
 
 const fields = {
@@ -34,7 +35,7 @@ exports.tileJSON = async (req, res, next) => {
   res.status(httpStatus.OK);
   return res.json({
     tilejson: '3.0.0',
-    tiles: [`http://${req.headers.host}/api/v1/tiles/{z}/{x}/{y}.pbf?start=${params.firstyear}&end=${params.lastyear}`],
+    tiles: [`http://${host || req.headers.host}/api/v1/tiles/{z}/{x}/{y}.pbf?start=${params.firstyear}&end=${params.lastyear}`],
     bounds: [-96, 29, -94, 30],
     minZoom: 9,
     maxZoom: 17,
