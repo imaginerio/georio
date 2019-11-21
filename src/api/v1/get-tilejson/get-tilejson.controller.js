@@ -36,7 +36,6 @@ exports.tileJSON = async (req, res, next) => {
   return res.json({
     tilejson: '3.0.0',
     tiles: [`http://${host || req.headers.host}/api/v1/tiles/{z}/{x}/{y}.pbf?start=${params.firstyear}&end=${params.lastyear}`],
-    bounds: [-96, 29, -94, 30],
     minZoom: 9,
     maxZoom: 17,
     vector_layers
