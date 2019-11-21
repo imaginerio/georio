@@ -15,9 +15,12 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   TileRange.calculate = function (start, totalFeatures, additionalFeatures) {
-    return sequelize.query(`SELECT getTileRange(${start}, ${totalFeatures}, ${additionalFeatures}) AS end`, { type: sequelize.QueryTypes.SELECT })
+    return TileRange.destroy({
+      where: {},
+      truncate: true
+    }).then(() => sequelize.query(`SELECT getTileRange(${start}, ${totalFeatures}, ${additionalFeatures}) AS end`, { type: sequelize.QueryTypes.SELECT })
       .then(end => this.create({ firstyear: start, lastyear: end[0].end })
-        .then(() => parseInt(end[0].end, 10)));
+        .then(() => parseInt(end[0].end, 10))));
   };
 
   return TileRange;
