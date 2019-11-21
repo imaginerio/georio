@@ -1,7 +1,5 @@
-const tiles = require('@services/make-tile');
-const uploadTile = require('@services/upload-tile');
 const makeParams = require('@services/make-params');
-const { Layer } = require('@models');
+const { Layer, Tile } = require('@models');
 
 /**
  * tiles
@@ -21,12 +19,12 @@ exports.tiles = async (req, res, next) => {
   }
   const params = makeParams(req);
   const layers = allLayers.filter(l => l.minzoom <= params.z);
-  const records = layers.map(l => tiles(params, l).then(tile => tile[0].mvt));
-  return Promise.all(records).then((mvts) => {
+  const records = layers.map(l => Tile.getTile(params, l));
+  return Promise.all(records).then((tiles) => {
+    const mvts = tiles.filter(t => t).map(t => t.mvt);
     res.setHeader('Content-Type', 'application/x-protobuf');
     if (mvts.length === 0) return res.sendStatus(204);
     const pbf = Buffer.concat(mvts);
-    uploadTile(params, pbf);
     return res.send(pbf);
   }).catch((e) => {
     console.log(e);

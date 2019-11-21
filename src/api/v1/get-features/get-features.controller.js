@@ -10,7 +10,7 @@ const { Layer } = require('@models/');
 exports.getFeatures = async (req, res, next) => Layer.findByPk(req.params.layer)
   .then((layer) => {
     if (layer) {
-      const stream = layer.getGeo({}, ['id', 'name', 'firstyear', 'lastyear', 'geom', ['TypeId', 'type']]);
+      const stream = layer.getGeo();
       return stream.pipe(transformer).pipe(geojsonStream.stringify()).pipe(res);
     }
 

@@ -25,22 +25,27 @@ module.exports = (sequelize, DataTypes) => {
     where: { base: true }
   });
 
-  Layer.prototype.getGeo = function (params = {}, attributes) { // eslint-disable-line func-names
+  Layer.getGeomModel = (geom) => {
     const {
-      Point, Line, Polygon, Type
+      Point, Line, Polygon
     } = sequelize.models;
     const geoms = {
       point: Point,
       line: Line,
       polygon: Polygon
     };
+    return geoms[geom];
+  };
+
+  Layer.prototype.getGeo = function (params = {}, attributes = ['id', 'name', 'firstyear', 'lastyear', 'geom', ['TypeId', 'type']]) { // eslint-disable-line func-names
+    const { Type } = sequelize.models;
     const { firstyear, lastyear } = params;
     const where = {};
     if (firstyear) where.firstyear = { [Op.lte]: firstyear };
     if (lastyear) where.lastyear = { [Op.gte]: lastyear };
 
     const { id, geometry } = this;
-    const model = geoms[geometry];
+    const model = Layer.getGeomModel(geometry);
     return model.findAllWithStream({
       attributes,
       where,
@@ -57,12 +62,58 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  Layer.prototype.getExtent = function (params) { // eslint-disable-line func-names
-    return this.getGeo(params, [[Sequelize.fn('ST_Extent', Sequelize.col('geom')), 'extents']])
-      .then((ex) => {
-        if (ex[0].extents) return ex[0].extents.match(/-?\d+\.?\d*/gm).map(e => parseFloat(e));
-        return [];
+  Layer.getUpdated = (date) => {
+    const { Type } = sequelize.models;
+
+    return Layer.findAll({ attributes: ['id', 'geometry'] })
+      .then((layers) => {
+        const records = layers.map((l) => {
+          const model = Layer.getGeomModel(l.geometry);
+          return model.findAll({
+            where: {
+              updatedAt: {
+                [Op.lt]: date
+              }
+            },
+            attributes: ['id'],
+            limit: 1,
+            include: [{
+              model: Type,
+              required: true,
+              include: [{
+                model: Layer,
+                attributes: ['id', 'geometry'],
+                where: { id: l.id }
+              }]
+            }]
+          });
+        });
+        return Promise.all(records)
+          .then(updated => updated.map(u => (u[0] ? u[0].Type.Layer : null)).filter(u => u));
       });
+  };
+
+  Layer.prototype.getExtent = function () { // eslint-disable-line func-names
+    const { geometry, id } = this;
+    const { Type } = sequelize.models;
+    const model = Layer.getGeomModel(geometry);
+    return model.findAll({
+      attributes: [[Sequelize.fn('ST_Extent', Sequelize.col('geom')), 'extents']],
+      include: [{
+        model: Type,
+        attributes: [],
+        required: true,
+        include: [{
+          model: Layer,
+          attributes: [],
+          where: { id }
+        }]
+      }],
+      raw: true
+    }).then((ex) => {
+      if (ex[0].extents) return ex[0].extents.match(/-?\d+\.?\d*/gm).map(e => parseFloat(e));
+      return [];
+    });
   };
 
   Layer.prototype.getGeoJSON = function (params) { // eslint-disable-line func-names

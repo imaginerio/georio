@@ -27,3 +27,13 @@ services:
       - migrations
     links: 
       - db
+  
+  tilecache:
+    build: .
+    volumes:
+      - .:/app
+    depends_on: 
+      - migrations
+    links: 
+      - db
+    command: node bin/tile-cache.js
