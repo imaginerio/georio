@@ -2757,10 +2757,9 @@ geojson-precision@^0.4.0:
   dependencies:
     commander "^2.4.0"
 
-geojson-stream@^0.1.0:
+"geojson-stream@https://github.com/axismaps/geojson-stream.git":
   version "0.1.0"
-  resolved "https://registry.yarnpkg.com/geojson-stream/-/geojson-stream-0.1.0.tgz#1b973b09c78f7bedc662b5f0b245ecdf162e90f1"
-  integrity sha512-svSg5fFXPaTiqzEBGXScA+nISaeC9rLvku2PH+wM5LToATUw2bLIrvls43ymnT9Xnp51nBPVyK9m4Af40KpJ7w==
+  resolved "https://github.com/axismaps/geojson-stream.git#2f6208b0bb84ca19b3b22d6afdba439eeb59d0c6"
   dependencies:
     JSONStream "^1.0.0"
     through "^2.3.4"

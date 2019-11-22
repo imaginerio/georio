@@ -73,7 +73,7 @@
     "express": "^4.15.2",
     "express-interceptor": "^1.2.0",
     "express-validation": "^1.0.2",
-    "geojson-stream": "^0.1.0",
+    "geojson-stream": "https://github.com/axismaps/geojson-stream.git",
     "helmet": "^3.5.0",
     "http-status": "^1.0.1",
     "joi": "^14.3.1",

@@ -5,12 +5,16 @@ const through = require('through');
  *
  */
 const geojsonTransformerUtil = through((d) => {
-  const doc = JSON.parse(d.toString());
-  const feature = { type: 'Feature' };
-  feature.geometry = doc.geom;
-  delete doc.geom;
-  feature.properties = doc;
-  geojsonTransformerUtil.queue(feature);
+  let doc = JSON.parse(d.toString());
+  doc = doc.map((f) => {
+    const feat = f;
+    const feature = { type: 'Feature' };
+    feature.geometry = feat.geom;
+    delete feat.geom;
+    feature.properties = feat;
+    return feature;
+  });
+  geojsonTransformerUtil.queue(doc);
 });
 
 module.exports = geojsonTransformerUtil;
