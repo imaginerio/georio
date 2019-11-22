@@ -18,7 +18,15 @@ services:
       - DB_URL_TEST=postgres://username:Dummy123@postgres/georio-store 
     command: ["./bin/wait-for-end.sh", "migrations", "yarn", "dev"]
 
-  tilecache: 
+  tilecache:
+    build: .
+    volumes:
+      - .:/app
+    depends_on: 
+      - migrations
+    links: 
+      - db
+    command: ["./bin/wait-for-end.sh", "migrations", "node", "bin/tile-cache.js"]
     environment:
       - NODE_ENV=development
       - PORT=5000

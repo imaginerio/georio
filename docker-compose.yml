@@ -28,13 +28,3 @@ services:
       - migrations
     links: 
       - db
-  
-  tilecache:
-    build: .
-    volumes:
-      - .:/app
-    depends_on: 
-      - migrations
-    links: 
-      - db
-    command: ["./bin/wait-for-end.sh", "migrations", "node", "bin/tile-cache.js"]
