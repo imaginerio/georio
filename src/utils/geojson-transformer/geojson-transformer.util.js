@@ -1,10 +1,11 @@
+/* eslint-disable func-names */
 const through = require('through');
 
 /**
  * GeojsonTransformer Utility
  *
  */
-const geojsonTransformerUtil = through((d) => {
+const geojsonTransformerUtil = through(function (d) {
   let doc = JSON.parse(d.toString());
   doc = doc.map((f) => {
     const feat = f;
@@ -14,7 +15,9 @@ const geojsonTransformerUtil = through((d) => {
     feature.properties = feat;
     return feature;
   });
-  geojsonTransformerUtil.queue(doc);
+  this.queue(doc);
+}, function end() {
+  this.queue(null);
 });
 
 module.exports = geojsonTransformerUtil;
