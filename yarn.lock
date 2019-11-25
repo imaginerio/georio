@@ -391,14 +391,6 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-JSONStream@^1.0.0:
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-1.3.5.tgz#3208c1f08d3a4d99261ab64f92302bc15e111ca0"
-  integrity sha512-E+iruNOY8VV9s4JEbe1aNEm6MiszPRr/UfcHMz0TQh1BXSxHK+ASV1R6W4HpjBhSeS+54PIsAMCBmwD06LLsqQ==
-  dependencies:
-    jsonparse "^1.2.0"
-    through ">=2.2.7 <3"
-
 abab@^2.0.0:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.3.tgz#623e2075e02eb2d3f2475e49f99c91846467907a"
@@ -2757,13 +2749,6 @@ geojson-precision@^0.4.0:
   dependencies:
     commander "^2.4.0"
 
-"geojson-stream@https://github.com/axismaps/geojson-stream.git":
-  version "0.1.0"
-  resolved "https://github.com/axismaps/geojson-stream.git#2f6208b0bb84ca19b3b22d6afdba439eeb59d0c6"
-  dependencies:
-    JSONStream "^1.0.0"
-    through "^2.3.4"
-
 get-caller-file@^2.0.1:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-2.0.5.tgz#4f94412a82db32f36e3b0b9741f8a97feb031f7e"
@@ -4155,11 +4140,6 @@ jsonfile@^4.0.0:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-jsonparse@^1.2.0:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/jsonparse/-/jsonparse-1.3.1.tgz#3f4dae4a91fac315f71062f8521cc239f1366280"
-  integrity sha1-P02uSpH6wxX3EGL4UhzCOfE2YoA=
-
 jsonwebtoken@^8.2.0:
   version "8.5.1"
   resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-8.5.1.tgz#00e71e0b8df54c2121a1f26137df2280673bcc0d"
@@ -4409,11 +4389,6 @@ lodash.unescape@4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/lodash.unescape/-/lodash.unescape-4.0.1.tgz#bf2249886ce514cda112fae9218cdc065211fc9c"
   integrity sha1-vyJJiGzlFM2hEvrpIYzcBlIR/Jw=
-
-lodash@4.17.11:
-  version "4.17.11"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
-  integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
 
 lodash@^4.17.1, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@~4.17.4:
   version "4.17.15"
@@ -4911,12 +4886,6 @@ node-sanitizer@^1.0.3:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/node-sanitizer/-/node-sanitizer-1.0.5.tgz#1b1e7ca7e98f78898a5a65e5e47e0633f8c78996"
   integrity sha512-oqcj1ch9PFiCIM7Ugr4IcgFl5O0r07ucAA+UX/B2q5u0SJhIfUwL9pAokommRso872MrvXr7xaOBPWSVOUkuvg==
-
-"node-sequelize-stream@https://github.com/axismaps/sequelize-stream.git":
-  version "1.0.10"
-  resolved "https://github.com/axismaps/sequelize-stream.git#7acb84f3c0382a304568f04c39190aadcb860fb0"
-  dependencies:
-    lodash "4.17.11"
 
 nodemon@^1.11.0:
   version "1.19.4"
@@ -7026,7 +6995,7 @@ through2@^2.0.0, through2@~2.0.3:
     readable-stream "~2.3.6"
     xtend "~4.0.1"
 
-through@2, "through@>=2.2.7 <3", through@^2.3.4, through@^2.3.6, through@^2.3.8:
+through@2, through@^2.3.6, through@^2.3.8:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
   integrity sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=

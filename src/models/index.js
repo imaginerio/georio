@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
-const sequelizeStream = require('node-sequelize-stream');
 
 const basename = path.basename(__filename);
 const config = require('@config/database');
@@ -23,8 +22,6 @@ Object.keys(db).forEach((modelName) => {
     db[modelName].associate(db);
   }
 });
-
-sequelizeStream(sequelize, 2000);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

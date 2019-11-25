@@ -46,9 +46,13 @@ module.exports = (sequelize, DataTypes) => {
 
     const { id, geometry } = this;
     const model = Layer.getGeomModel(geometry);
-    return model.findAllWithStream({
+    return model.findAll({
       attributes,
       where,
+      limit: 5000,
+      order: [
+        ['updatedAt', 'DESC']
+      ],
       include: [{
         model: Type,
         attributes: [],
