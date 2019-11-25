@@ -1,3 +1,7 @@
+const Sequelize = require('sequelize');
+
+const { Op } = Sequelize;
+
 module.exports = (sequelize, DataTypes) => {
   const Tile = sequelize.define('Tile', {
     z: DataTypes.INTEGER,
@@ -41,11 +45,27 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Tile.getTile = (params, layer) => {
-    const where = params;
-    delete where.layer;
-    where.LayerId = layer.id;
+    const {
+      z,
+      x,
+      y,
+      firstyear,
+      lastyear
+    } = params;
+
     return Tile.findOne({
-      where,
+      where: {
+        z,
+        x,
+        y,
+        firstyear: {
+          [Op.lte]: lastyear
+        },
+        lastyear: {
+          [Op.gte]: firstyear
+        },
+        LayerId: layer.id
+      },
       attributes: ['mvt']
     });
   };

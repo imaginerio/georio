@@ -15,7 +15,7 @@ const cache = async () => makeTileRange()
           await layer.getExtent()
             .then(async (extent) => {
               const tiles = [];
-              for (let z = 9; z <= 17; z += 1) {
+              for (let z = 14; z <= 18; z += 1) {
                 const minTile = tilebelt.pointToTile(extent[0], extent[3], z);
                 const maxTile = tilebelt.pointToTile(extent[2], extent[1], z);
                 for (let x = minTile[0]; x <= maxTile[0]; x += 1) {
