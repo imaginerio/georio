@@ -11,7 +11,10 @@ exports.getFeatures = async (req, res, next) => Layer.findByPk(req.params.layer)
   .then((layer) => {
     if (layer) {
       const stream = layer.getGeo();
-      return stream.pipe(transformer).pipe(geojsonStream.stringify()).pipe(res);
+      return stream
+        .pipe(transformer)
+        .pipe(geojsonStream.stringify())
+        .pipe(res);
     }
 
     res.status(httpStatus.INTERNAL_SERVER_ERROR);
