@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
 const { Layer } = require('@models/');
+const _ = require('underscore');
 
 /**
  * getFeatures
@@ -10,7 +11,15 @@ exports.getFeatures = async (req, res, next) => Layer.findByPk(req.params.layer)
     if (layer) {
       return layer.getGeo().then((features) => {
         const geojson = { type: 'FeatureCollection' };
-        geojson.features = features;
+        geojson.features = features.map((f) => {
+	  const properties = _.omit(f.dataValues, 'geom');
+	  const geometry = f.geom;
+	  return {
+	    type: 'Feature',
+	    properties,
+	    geometry
+	  };
+	});
         res.status(httpStatus.OK);
         return res.json(geojson);
       });
