@@ -8,7 +8,6 @@ module.exports = {
     body: {
       type: Joi.string().required(),
       dataType: Joi.string().valid('geojson', 'wkt'),
-      geometry: Joi.string().required().valid('point', 'line', 'polygon'),
       data: Joi.object()
     },
     response: {

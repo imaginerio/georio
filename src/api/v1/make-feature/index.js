@@ -14,7 +14,6 @@ const router = express.Router();
  * @apiGroup MAKE
  *
  * @apiParam  {String} type Feature type UUID
- * @apiParam  {String} geometry Geometry type (point / line / polygon)
  * @apiParam  {String} [dataType=geojson] File type for geographic data (geojson / wkt)
  * @apiParam  {Object} data Object containing geographic data and properties
  * @apiParam  {Object} data[properties] Feature attributes. Must include 'firstyear' and 'lastyear' and can include 'name' and 'tags'

@@ -12,7 +12,6 @@ describe('POST /api/v1/make/feature', () => {
       .then((type) => {
         body = {
           type,
-          geometry: 'line',
           data: {
             type: 'Feature',
             properties: {
