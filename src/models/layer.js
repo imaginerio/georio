@@ -38,6 +38,9 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   Layer.prototype.getGeo = function (params = {}, attributes = ['id', 'name', 'firstyear', 'lastyear', 'geom', ['TypeId', 'type']]) { // eslint-disable-line func-names
+  Layer.prototype.getGeo = function (params = {}, attributes = [
+    'id', 'name', 'firstyear', 'lastyear', 'approved', 'tags', 'geom', ['TypeId', 'type']
+  ]) {
     const { Type } = sequelize.models;
     const { firstyear, lastyear } = params;
     const where = {};
