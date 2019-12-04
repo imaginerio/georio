@@ -6,11 +6,11 @@ module.exports = {
   type: 'post',
   joiSchema: {
     body: {
-      name: Joi.string(),
+      name: Joi.string().allow(''),
       firstyear: Joi.number().integer(),
       lastyear: Joi.number().integer(),
       type: Joi.string(),
-      tags: Joi.string(),
+      tags: Joi.string().allow(''),
       approved: Joi.boolean(),
       geom: Joi.object().keys({
         coordinates: Joi.array().required(),
