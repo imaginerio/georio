@@ -5,7 +5,17 @@ module.exports = {
   path: '/api/v1/update/feature',
   type: 'post',
   joiSchema: {
-    body: {},
+    body: {
+      name: Joi.string(),
+      firstyear: Joi.number().integer(),
+      lastyear: Joi.number().integer(),
+      tags: Joi.string(),
+      approved: Joi.boolean(),
+      geom: Joi.object().keys({
+        coordinates: Joi.array().required(),
+        type: Joi.string().required()
+      })
+    },
     response: {
       200: {
         description: 'OK',
