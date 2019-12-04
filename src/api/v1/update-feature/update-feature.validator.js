@@ -9,6 +9,7 @@ module.exports = {
       name: Joi.string(),
       firstyear: Joi.number().integer(),
       lastyear: Joi.number().integer(),
+      type: Joi.string(),
       tags: Joi.string(),
       approved: Joi.boolean(),
       geom: Joi.object().keys({
