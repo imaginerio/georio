@@ -48,8 +48,8 @@ const convertValidationError = (err, req) => {
   err.errors.forEach((error) => {
     formattedErrors.push(generateError(
       [req.path.replace('/', '').split('/').join(':'), codes.validationError].join(':'),
-      'We seems to have a problem!',
-      'We have some trouble validating your data - please contact our customer support',
+      'There was a problem',
+      'Cannot validate data',
       error.messages[0],
       _.omit(error, ['messages'])
     ));
@@ -76,8 +76,8 @@ exports.convertValidationError = convertValidationError;
 const convertGenericError = (err, req) => {
   const wrappedError = generateError(
     err.code || [req.path.replace('/', '').split('/').join(':'), codes.unknown].join(':'),
-    'We seems to have a problem!',
-    'Our internal system is having problem, please contact our administrator!',
+    'There was a problem',
+    'Internal system error',
     err.message, []
   );
 

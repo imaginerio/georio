@@ -65,9 +65,9 @@ describe('Middleware - error', () => {
     expect(apiError.errors[0]).toHaveProperty('errorCode');
     expect(apiError.errors[0].errorCode).toBe('api:v1:auth:error:validationError');
     expect(apiError.errors[0]).toHaveProperty('errorTitle');
-    expect(apiError.errors[0].errorTitle).toBe('We seems to have a problem!');
+    expect(apiError.errors[0].errorTitle).toBe('There was a problem');
     expect(apiError.errors[0]).toHaveProperty('errorDescription');
-    expect(apiError.errors[0].errorDescription).toBe('We have some trouble validating your data - please contact our customer support');
+    expect(apiError.errors[0].errorDescription).toBe('Cannot validate data');
     expect(apiError.errors[0]).toHaveProperty('errorDebugDescription');
     expect(apiError.errors[0].errorDebugDescription).toBe('"nonce" is required');
     expect(apiError.route).toBe(route);
@@ -93,9 +93,9 @@ describe('Middleware - error', () => {
     expect(apiError.errors[0]).toHaveProperty('errorCode');
     expect(apiError.errors[0].errorCode).toBe('api:v1:auth:error:validationError');
     expect(apiError.errors[0]).toHaveProperty('errorTitle');
-    expect(apiError.errors[0].errorTitle).toBe('We seems to have a problem!');
+    expect(apiError.errors[0].errorTitle).toBe('There was a problem');
     expect(apiError.errors[0]).toHaveProperty('errorDescription');
-    expect(apiError.errors[0].errorDescription).toBe('We have some trouble validating your data - please contact our customer support');
+    expect(apiError.errors[0].errorDescription).toBe('Cannot validate data');
     expect(apiError.errors[0]).toHaveProperty('errorDebugDescription');
     expect(apiError.errors[0].errorDebugDescription).toBe('"nonce" is required');
     expect(apiError.route).toBe('default');
@@ -120,9 +120,9 @@ describe('Middleware - error', () => {
     expect(apiError.errors[0]).toHaveProperty('errorCode');
     expect(apiError.errors[0].errorCode).toBe('api:v1:auth:error:unknown');
     expect(apiError.errors[0]).toHaveProperty('errorTitle');
-    expect(apiError.errors[0].errorTitle).toBe('We seems to have a problem!');
+    expect(apiError.errors[0].errorTitle).toBe('There was a problem');
     expect(apiError.errors[0]).toHaveProperty('errorDescription');
-    expect(apiError.errors[0].errorDescription).toBe('Our internal system is having problem, please contact our administrator!');
+    expect(apiError.errors[0].errorDescription).toBe('Internal system error');
     expect(apiError.errors[0]).toHaveProperty('errorDebugDescription');
     expect(apiError.errors[0].errorDebugDescription).toBe('Something went wrong');
   });
