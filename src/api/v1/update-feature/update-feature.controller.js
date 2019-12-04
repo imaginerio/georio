@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { Layer } = require('@models/');
+const { Layer, Type } = require('@models/');
 
 /**
  * updateFeature
@@ -10,8 +10,13 @@ exports.updateFeature = async (req, res, next) => Layer.findByPk(req.params.laye
     if (layer) {
       const model = await layer.getGeomModel();
       return model.findByPk(req.params.id)
-        .then((feature) => {
+        .then(async (feature) => {
           if (feature) {
+            if (req.body.type) {
+              const type = await Type.findByPk(req.body.type);
+              if (type) await feature.setType(type);
+            }
+
             return feature.update(req.body)
               .then(() => {
                 res.status(httpStatus.OK);
