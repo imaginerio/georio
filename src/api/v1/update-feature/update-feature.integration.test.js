@@ -1,16 +1,22 @@
 /* eslint-disable arrow-body-style */
 const request = require('supertest');
 const httpStatus = require('http-status');
+const newFeature = require('@services/new-feature');
 const app = require('@app');
 const { Layer, Type } = require('@models/');
 
-describe('POST /api/v1/make/feature', () => {
-  let body;
+describe('POST /api/v1/update/feature', () => {
+  const body = {
+    firstyear: 1900
+  };
+  let id;
+  let layer;
 
   beforeEach(() => Layer.newLayer({ geometry: 'line' })
-    .then(layer => Type.newType(layer, {})
-      .then((type) => {
-        body = {
+    .then((layerId) => {
+      layer = layerId;
+      return Type.newType(layer, {})
+        .then(type => newFeature({
           type,
           data: {
             type: 'Feature',
@@ -45,14 +51,16 @@ describe('POST /api/v1/make/feature', () => {
               type: 'LineString'
             }
           }
-        };
-      })));
+        }).then((feature) => {
+          ({ id } = feature.dataValues);
+        }));
+    }));
 
   afterEach(() => {});
 
-  it('should integrate api /make/feature', () => {
+  it('should integrate api /update/feature', () => {
     return request(app)
-      .post('/api/v1/make/feature')
+      .post(`/api/v1/update/feature/${layer}/${id}`)
       .send(body)
       .expect(httpStatus.OK)
       .then((res) => {

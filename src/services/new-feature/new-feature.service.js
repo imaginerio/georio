@@ -21,13 +21,9 @@ const types = {
  *
  */
 const newFeatureService = (body) => {
-  const {
-    geometry,
-    type
-  } = body;
+  const { type } = body;
 
   const dataType = body.dataType ? body.dataType : 'geojson';
-  const feature = geoms[geometry];
   const geoFunc = dataType ? types[dataType] : types.geojson;
 
   if (!body.data || !body.data.geometry) return Promise.reject(new Error('Missing geometry'));
@@ -47,7 +43,10 @@ const newFeatureService = (body) => {
   return Type.findByPk(type)
     .then((typeId) => {
       if (!typeId) return Promise.reject(new Error('Type not found'));
-      return feature.create(params).then(feat => feat.setType(type));
+      return typeId.getGeom().then((typeGeom) => {
+        const feature = geoms[typeGeom];
+        return feature.create(params).then(feat => feat.setType(type));
+      });
     }).catch(e => Promise.reject(e));
 };
 

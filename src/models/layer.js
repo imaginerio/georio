@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 const Sequelize = require('sequelize');
 const { promisify } = require('util');
 const dbgeo = require('dbgeo');
@@ -37,7 +38,13 @@ module.exports = (sequelize, DataTypes) => {
     return geoms[geom];
   };
 
-  Layer.prototype.getGeo = function (params = {}, attributes = ['id', 'name', 'firstyear', 'lastyear', 'geom', ['TypeId', 'type']]) { // eslint-disable-line func-names
+  Layer.prototype.getGeomModel = function () {
+    return Layer.getGeomModel(this.geometry);
+  };
+
+  Layer.prototype.getGeo = function (params = {}, attributes = [
+    'id', 'name', 'firstyear', 'lastyear', 'approved', 'tags', 'geom', ['TypeId', 'type']
+  ]) {
     const { Type } = sequelize.models;
     const { firstyear, lastyear } = params;
     const where = {};
@@ -97,7 +104,7 @@ module.exports = (sequelize, DataTypes) => {
       });
   };
 
-  Layer.prototype.getExtent = function () { // eslint-disable-line func-names
+  Layer.prototype.getExtent = function () {
     const { geometry, id } = this;
     const { Type } = sequelize.models;
     const model = Layer.getGeomModel(geometry);
@@ -120,7 +127,7 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  Layer.prototype.getGeoJSON = function (params) { // eslint-disable-line func-names
+  Layer.prototype.getGeoJSON = function (params) {
     return this.getGeo(params, [
       'id',
       'name',

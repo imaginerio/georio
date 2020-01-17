@@ -1,14 +1,21 @@
 const Joi = require('joi');
 
 module.exports = {
-  name: 'feature',
-  path: '/api/v1/feature',
+  name: 'updateFeature',
+  path: '/api/v1/update/feature',
   type: 'post',
   joiSchema: {
     body: {
-      type: Joi.string().required(),
-      dataType: Joi.string().valid('geojson', 'wkt'),
-      data: Joi.object()
+      name: Joi.string().allow(null, ''),
+      firstyear: Joi.number().integer(),
+      lastyear: Joi.number().integer(),
+      type: Joi.string(),
+      tags: Joi.string().allow(null, ''),
+      approved: Joi.boolean(),
+      geom: Joi.object().keys({
+        coordinates: Joi.array().required(),
+        type: Joi.string().required()
+      })
     },
     response: {
       200: {

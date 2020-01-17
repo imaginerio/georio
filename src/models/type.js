@@ -22,5 +22,10 @@ module.exports = (sequelize, DataTypes) => {
     return Type.create(props).then(type => type.id);
   };
 
+  // eslint-disable-next-line func-names
+  Type.prototype.getGeom = function () {
+    return this.getLayer().then(layer => layer.geometry);
+  };
+
   return Type;
 };
