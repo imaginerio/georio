@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
     return model.findAll({
       attributes,
       where,
-      limit: 5000,
+      limit: 10000,
       order: [
         ['updatedAt', 'DESC']
       ],
