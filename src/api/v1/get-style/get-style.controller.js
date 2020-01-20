@@ -1,10 +1,6 @@
 const httpStatus = require('http-status');
 const makeParams = require('@services/make-params');
-const {
-  Style, Type, Layer, Sequelize
-} = require('@models');
-
-const { Op } = Sequelize;
+const { Style, Type, Layer } = require('@models');
 
 /**
  * getStyle
@@ -44,11 +40,7 @@ exports.getStyle = async (req, res, next) => {
     });
 
     return Style.findAll({
-      where: {
-        TypeId: {
-          [Op.ne]: null
-        }
-      },
+      order: ['order'],
       attributes: ['id', 'style'],
       include: [{
         model: Type,
