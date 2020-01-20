@@ -50,6 +50,11 @@ const init = async () => {
           });
         }
       }
+    } else if (s.type === 'background') {
+      await Style.create({
+        style: _.pick(s, 'type', 'paint'),
+        order: i
+      });
     }
   });
   // process.exit();

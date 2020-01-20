@@ -53,15 +53,19 @@ exports.getStyle = async (req, res, next) => {
     }).then((styles) => {
       json.layers = styles.map((s) => {
         const layer = s.style;
-        layer.id = s.Type.id + s.id;
-        layer.source = 'composite';
-        layer['source-layer'] = s.Type.Layer.id;
-        layer.filter = [
-          'all',
-          ['<=', 'firstyear', params.firstyear],
-          ['>=', 'lastyear', params.lastyear],
-          ['==', 'type', s.Type.id]
-        ];
+        if (s.Type) {
+          layer.id = s.Type.id + s.id;
+          layer.source = 'composite';
+          layer['source-layer'] = s.Type.Layer.id;
+          layer.filter = [
+            'all',
+            ['<=', 'firstyear', params.firstyear],
+            ['>=', 'lastyear', params.lastyear],
+            ['==', 'type', s.Type.id]
+          ];
+        } else if (layer.type === 'background') {
+          layer.id = 'background';
+        }
         return layer;
       });
 
