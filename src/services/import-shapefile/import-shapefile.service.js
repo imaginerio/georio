@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 const shp = require('shapefile');
 const newFeature = require('@services/new-feature');
-const { Type, Layer } = require('@models');
+const { Type } = require('@models');
 
 const geoms = {
   Polygon: 'polygon',
@@ -21,19 +21,9 @@ const importShapefileService = async (file, layer) => layer.getTypes()
     });
     const model = layer.getGeomModel();
     return model.destroy({
-      where: {},
-      include: [{
-        model: Type,
-        attributes: [],
-        required: true,
-        include: [{
-          model: Layer,
-          attributes: [],
-          where: {
-            id: layer.id
-          }
-        }]
-      }]
+      where: {
+        TypeId: Object.values(types)
+      }
     }).then(() => shp.open(file)
       .then(source => source.read()
         .then(async function log(result) {
