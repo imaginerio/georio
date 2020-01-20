@@ -4,9 +4,9 @@ const { Layer } = require('@models');
 
 const init = async () => {
   console.log(`Loading features from ${process.argv[2]}`);
-  const title = process.argv[2].match(/\w*(?=(point|line|poly)\.shp$)/gm)[0];
+  const title = process.argv[2].match(/\w*(?=(point|line|polys?)\.shp$)/gm)[0];
   let geometry = process.argv[2].match(/(point|line|poly)/)[0];
-  geometry = geometry === 'poly' ? 'polygon' : geometry;
+  geometry = geometry.match(/poly/) ? 'polygon' : geometry;
   return Layer.findOne({
     where: { title, geometry }
   }).then(async (layer) => {
