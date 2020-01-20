@@ -1,5 +1,6 @@
 /* eslint-disable consistent-return */
 const shp = require('shapefile');
+const ora = require('ora');
 const newFeature = require('@services/new-feature');
 const { Type } = require('@models');
 
@@ -25,30 +26,40 @@ const importShapefileService = async (file, layer) => layer.getTypes()
         TypeId: Object.values(types)
       }
     }).then(() => shp.open(file)
-      .then(source => source.read()
-        .then(async function log(result) {
-          if (result.done) return;
-          const { properties, geometry } = result.value;
-          if (properties.firstyear && properties.lastyear && properties.firstyear <= properties.lastyear) {
-            let type;
-            if (Object.keys(types).includes(properties.type)) {
-              type = types[properties.type];
-            } else {
-              type = await Type.newType(layer.id, { title: properties.type });
-              types[properties.type] = type;
+      .then((source) => {
+        let i = 0;
+        const spinner = ora(`Loading ${file} ${i}`).start();
+        return source.read()
+          .then(async function log(result) {
+            if (result.done) {
+              spinner.succeed();
+              return;
             }
-            await newFeature({
-              type,
-              geometry: geoms[geometry.type],
-              dataType: 'geojson',
-              data: {
-                properties,
-                geometry
+            const { properties, geometry } = result.value;
+            if (properties.firstyear && properties.lastyear && properties.firstyear <= properties.lastyear) {
+              let type;
+              if (Object.keys(types).includes(properties.type)) {
+                type = types[properties.type];
+              } else {
+                type = await Type.newType(layer.id, { title: properties.type });
+                types[properties.type] = type;
               }
-            });
-          }
-          return source.read().then(log);
-        })));
+              i += 1;
+
+              spinner.text = `Loading ${layer.title} ${i}`;
+              await newFeature({
+                type,
+                geometry: geoms[geometry.type],
+                dataType: 'geojson',
+                data: {
+                  properties,
+                  geometry
+                }
+              });
+            }
+            return source.read().then(log);
+          });
+      }));
   });
 
 module.exports = importShapefileService;

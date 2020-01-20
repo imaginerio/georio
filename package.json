@@ -82,6 +82,7 @@
     "moment-timezone": "^0.5.13",
     "nanoid": "^2.0.3",
     "node-sanitizer": "^1.0.3",
+    "ora": "^4.0.3",
     "passport": "^0.4.0",
     "passport-http-bearer": "^1.0.1",
     "passport-jwt": "4.0.0",
