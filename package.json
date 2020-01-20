@@ -91,6 +91,7 @@
     "pm2": "^2.4.6",
     "response-time": "^2.3.2",
     "sequelize": "^4.41.0",
+    "shapefile": "^0.6.6",
     "through": "^2.3.8",
     "underscore": "^1.9.1",
     "universal-cookie-express": "^3.0.7",
