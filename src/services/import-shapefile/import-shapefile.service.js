@@ -29,22 +29,24 @@ const importShapefileService = async (file, layer) => layer.getTypes()
         .then(async function log(result) {
           if (result.done) return;
           const { properties, geometry } = result.value;
-          let type;
-          if (Object.keys(types).includes(properties.type)) {
-            type = types[properties.type];
-          } else {
-            type = await Type.newType(layer.id, { title: properties.type });
-            types[properties.type] = type;
-          }
-          await newFeature({
-            type,
-            geometry: geoms[geometry.type],
-            dataType: 'geojson',
-            data: {
-              properties,
-              geometry
+          if (properties.firstyear && properties.lastyear && properties.firstyear <= properties.lastyear) {
+            let type;
+            if (Object.keys(types).includes(properties.type)) {
+              type = types[properties.type];
+            } else {
+              type = await Type.newType(layer.id, { title: properties.type });
+              types[properties.type] = type;
             }
-          });
+            await newFeature({
+              type,
+              geometry: geoms[geometry.type],
+              dataType: 'geojson',
+              data: {
+                properties,
+                geometry
+              }
+            });
+          }
           return source.read().then(log);
         })));
   });
