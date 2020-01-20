@@ -93,7 +93,7 @@ module.exports = (sequelize, DataTypes) => {
               required: true,
               include: [{
                 model: Layer,
-                attributes: ['id', 'geometry'],
+                attributes: ['id', 'geometry', 'title'],
                 where: { id: l.id }
               }]
             }]

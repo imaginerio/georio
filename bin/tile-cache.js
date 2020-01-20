@@ -3,6 +3,7 @@
 
 require('module-alias/register');
 const tilebelt = require('@mapbox/tilebelt');
+const ora = require('ora');
 const makeTileRange = require('@services/make-tilerange');
 const { Tile, Layer, TileRange } = require('@models/');
 
@@ -29,9 +30,14 @@ const cache = async () => makeTileRange()
                   }
                 }
               }
+              let i = 0;
+              const spinner = ora(`Caching ${layer.title}`).start();
               for (const t of tiles) {
+                i += 1;
+                spinner.text = `Caching ${layer.title} ${i}/${tiles.length}`;
                 await Tile.makeTile(t, layer.dataValues);
               }
+              spinner.succeed();
             });
         }
       })));
