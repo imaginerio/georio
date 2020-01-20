@@ -67,6 +67,11 @@ module.exports = (sequelize, DataTypes) => {
         LayerId: layer.id
       },
       attributes: ['mvt']
+    }).then((tile) => {
+      if (tile) return tile;
+      console.log('TILE DOES NOT EXIST');
+      return Tile.makeTile(params, layer)
+        .then(() => Tile.getTile(params, layer));
     });
   };
 
