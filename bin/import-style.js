@@ -26,7 +26,7 @@ const init = async () => {
         const json = s;
         if (json.layout['text-field'] && json.layout['text-field'][1][1] === 'Name') json.layout['text-field'][1][1] = 'name';
         const minzoom = getMinZoom(json);
-        if (minzoom < Infinity && (minzoom < layer.minzoom || !layer.minzoom)) await layer.update({ minzoom });
+        if (minzoom < Infinity && (minzoom < layer.minzoom || !layer.minzoom)) await layer.update({ minzoom, base: true });
 
         const filter = s.filter.find(f => f[1] && f[1][1] === 'Type');
         if (filter) {
