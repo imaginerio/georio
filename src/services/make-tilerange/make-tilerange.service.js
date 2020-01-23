@@ -7,7 +7,10 @@ const { TileRange } = require('@models');
  *
  */
 
-const makeTilerangeService = (totalFeatures = 200000, additionalFeatures = 100000) => TileRange.getFirstYear()
+const makeTilerangeService = (totalFeatures = 200000, additionalFeatures = 100000) => TileRange.destroy({
+  where: {},
+  truncate: true
+}).then(() => TileRange.getFirstYear())
   .then(async (start) => {
     let { firstyear } = start[0];
     while (firstyear <= new Date().getFullYear()) {
