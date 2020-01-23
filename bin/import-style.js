@@ -21,12 +21,13 @@ const init = async () => {
           }
         }
       });
-      if (layer) {
+      if (layer && s.filter) {
+        await layer.update({ base: true });
         const types = await layer.getTypes();
         const json = s;
         if (json.layout['text-field'] && json.layout['text-field'][1][1] === 'Name') json.layout['text-field'][1][1] = 'name';
         const minzoom = getMinZoom(json);
-        if (minzoom < Infinity && (minzoom < layer.minzoom || !layer.minzoom)) await layer.update({ minzoom, base: true });
+        if (minzoom < Infinity && (minzoom < layer.minzoom || !layer.minzoom)) await layer.update({ minzoom });
 
         const filter = s.filter.find(f => f[1] && f[1][1] === 'Type');
         if (filter) {
