@@ -14,6 +14,9 @@ const geoms = [Point, Line, Polygon];
  */
 exports.getLegend = async (req, res, next) => {
   const params = makeParamsService(req);
+  let base = true;
+  if (req.params.include === 'thematic') base = [false, null];
+  if (req.params.include === 'all') base = [true, false, null];
   const records = geoms.map(g => g.findAll({
     attributes: ['TypeId'],
     where: {
@@ -30,10 +33,12 @@ exports.getLegend = async (req, res, next) => {
     const types = [];
     features.forEach(f => f.forEach(g => types.push(g.TypeId)));
     return Layer.findAll({
-      attributes: ['id', 'geometry', 'title', 'base'],
+      attributes: ['id', 'geometry', 'title', 'base', 'slider'],
+      where: { base },
       include: [{
         model: Type,
         attributes: ['id', 'title'],
+        order: ['order'],
         where: {
           id: types
         },

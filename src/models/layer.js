@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     remoteId: DataTypes.STRING,
     geometry: DataTypes.STRING,
     minzoom: DataTypes.INTEGER,
-    base: DataTypes.BOOLEAN
+    base: DataTypes.BOOLEAN,
+    slider: DataTypes.STRING
   }, {});
 
   Layer.associate = (models) => {

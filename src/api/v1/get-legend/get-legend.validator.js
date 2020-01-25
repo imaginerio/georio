@@ -5,7 +5,9 @@ module.exports = {
   path: '/api/v1/get/legend',
   type: 'get',
   joiSchema: {
-    body: {},
+    params: {
+      include: Joi.string().valid('all', 'thematic', 'base')
+    },
     response: {
       200: {
         description: 'OK',

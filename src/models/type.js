@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
   const Type = sequelize.define('Type', {
     title: DataTypes.TEXT,
     remoteId: DataTypes.STRING,
-    minzoom: DataTypes.INTEGER
+    minzoom: DataTypes.INTEGER,
+    order: DataTypes.INTEGER
   }, {});
 
   Type.associate = (models) => {

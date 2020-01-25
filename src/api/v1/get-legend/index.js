@@ -6,13 +6,14 @@ const validator = require('./get-legend.validator');
 const router = express.Router();
 
 /**
- * @api {get} api/v1/get/legend getLegend
+ * @api {get} api/v1/get/legend/:include? getLegend
  * @apiDescription Returns layer and type hierarchy for all features for a given year range with a swatch color for a legend
  * @apiVersion 1.0.0
  * @apiName getLegend
  * @apiPermission public
  * @apiGroup GET
  *
+ * @apiParam  (Param) {string="base", "thematic", "all"} [include=base]  Include thematic layers or base layers only
  * @apiParam  (Query String) {Number} [start=0]  First year for legend
  * @apiParam  (Query String) {Number} [end=8888]  Last year for legend
  *
@@ -22,7 +23,7 @@ const router = express.Router();
  *
  * @apiError (Bad Request 400)  ValidationError  Some parameters may contain invalid values
  */
-router.route('/')
+router.route('/:include?')
   .get(validate(validator.joiSchema), controller.getLegend);
 
 module.exports = router;
