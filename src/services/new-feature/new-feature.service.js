@@ -45,7 +45,13 @@ const newFeatureService = (body) => {
       if (!typeId) return Promise.reject(new Error('Type not found'));
       return typeId.getGeom().then((typeGeom) => {
         const feature = geoms[typeGeom];
-        return feature.create(params).then(feat => feat.setType(type));
+        return feature.create(params)
+          .then(feat => feat.setType(type)
+            .then(() => typeId.getLayer())
+            .then((layer) => {
+              layer.changed('updatedAt', true);
+              return layer.save();
+            }).then(() => feat));
       });
     }).catch(e => Promise.reject(e));
 };
