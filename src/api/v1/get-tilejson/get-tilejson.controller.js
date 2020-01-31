@@ -16,6 +16,7 @@ const fields = {
  */
 exports.tileJSON = async (req, res, next) => {
   let layers = [];
+  let layerUrl = '';
   if (req.params.layer) {
     layers = await Layer.findAll({
       attributes: ['id', 'title', 'geometry', 'minzoom'],
@@ -23,6 +24,7 @@ exports.tileJSON = async (req, res, next) => {
         id: req.params.layer
       }
     });
+    layerUrl = `/${req.params.layer}`;
   } else {
     layers = await Layer.getBaseLayers();
   }
@@ -35,7 +37,7 @@ exports.tileJSON = async (req, res, next) => {
   res.status(httpStatus.OK);
   return res.json({
     tilejson: '3.0.0',
-    tiles: [`http://${host || req.headers.host}/api/v1/tiles/{z}/{x}/{y}.pbf?start=${params.firstyear}&end=${params.lastyear}`],
+    tiles: [`http://${host || req.headers.host}/api/v1/tiles${layerUrl}/{z}/{x}/{y}.pbf?start=${params.firstyear}&end=${params.lastyear}`],
     minZoom: 9,
     maxZoom: 17,
     vector_layers
