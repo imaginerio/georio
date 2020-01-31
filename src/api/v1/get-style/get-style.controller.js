@@ -25,6 +25,7 @@ exports.getStyle = async (req, res, next) => {
     sprite: 'mapbox://sprites/axismaps/cjvmx96894g8h1cmrayjddslz/d54dto65po428e2qwof244z46',
     glyphs: 'mapbox://fonts/axismaps/{fontstack}/{range}.pbf'
   };
+  const thematicLayerIds = [];
 
   return Layer.findAll({
     attributes: ['id'],
@@ -38,6 +39,7 @@ exports.getStyle = async (req, res, next) => {
         url: `http://${host || req.headers.host}/api/v1/get/tilejson/${id}/?start=${params.firstyear}&end=${params.lastyear}`,
         type: 'vector'
       };
+      thematicLayerIds.push(id);
     });
 
     return Style.findAll({
@@ -56,7 +58,7 @@ exports.getStyle = async (req, res, next) => {
         const layer = s.style;
         if (s.Type) {
           layer.id = s.Type.id + s.id;
-          layer.source = 'composite';
+          layer.source = thematicLayerIds.includes(s.Type.Layer.id) ? s.Type.Layer.id : 'composite';
           layer['source-layer'] = s.Type.Layer.id;
           layer.filter = [
             'all',
