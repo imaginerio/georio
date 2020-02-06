@@ -1,5 +1,5 @@
 const makeParams = require('@services/make-params');
-const { Layer, Tile } = require('@models');
+const { Layer, Tile, Cache } = require('@models');
 
 /**
  * tiles
@@ -25,7 +25,8 @@ exports.tiles = async (req, res, next) => {
     res.setHeader('Content-Type', 'application/x-protobuf');
     if (mvts.length === 0) return res.sendStatus(204);
     const pbf = Buffer.concat(mvts);
-    return res.send(pbf);
+    res.send(pbf);
+    return Cache.upload(req, pbf);
   }).catch((e) => {
     console.log(e);
     res.sendStatus(500);

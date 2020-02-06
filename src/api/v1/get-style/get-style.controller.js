@@ -69,6 +69,7 @@ exports.getStyle = async (req, res, next) => {
           ];
           if (thematic) {
             layer.source = s.Type.Layer.id;
+            layer.layout = layer.layout || {};
             layer.layout.visibility = 'none';
           }
         } else if (layer.type === 'background') {
