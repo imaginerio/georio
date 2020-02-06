@@ -57,8 +57,9 @@ exports.getStyle = async (req, res, next) => {
       json.layers = styles.map((s) => {
         const layer = s.style;
         if (s.Type) {
+          const thematic = thematicLayerIds.includes(s.Type.Layer.id);
           layer.id = s.Type.id + s.id;
-          layer.source = thematicLayerIds.includes(s.Type.Layer.id) ? s.Type.Layer.id : 'composite';
+          layer.source = 'composite';
           layer['source-layer'] = s.Type.Layer.id;
           layer.filter = [
             'all',
@@ -66,6 +67,10 @@ exports.getStyle = async (req, res, next) => {
             ['>=', 'lastyear', params.lastyear],
             ['==', 'type', s.Type.id]
           ];
+          if (thematic) {
+            layer.source = s.Type.Layer.id;
+            layer.layout.visibility = 'none';
+          }
         } else if (layer.type === 'background') {
           layer.id = 'background';
         }
