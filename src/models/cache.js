@@ -13,14 +13,13 @@ module.exports = (sequelize, DataTypes) => {
     layer: DataTypes.STRING
   }, {});
 
-  Cache.check = where => Cache.findOne({ where }).then((c) => {
-    if (c) return true;
-    return false;
-  });
+  Cache.check = where => Cache.findOne({ where });
 
   Cache.upload = (req, pbf) => {
     const params = makeParams(req);
+    params.layer = params.layer || 'base';
     const {
+      layer,
       firstyear,
       lastyear,
       z,
@@ -29,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     } = params;
     const putObjectPromise = s3.putObject({
       Bucket: 'tilecache.axismaps.io',
-      Key: `highways-waterways/${firstyear}-${lastyear}/${z}/${x}/${y}.pbf`,
+      Key: `highways-waterways/${layer}/${firstyear}-${lastyear}/${z}/${x}/${y}.pbf`,
       ACL: 'public-read',
       Body: pbf
     }).promise();
