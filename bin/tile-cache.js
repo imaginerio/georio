@@ -7,7 +7,7 @@ const ora = require('ora');
 const makeTileRange = require('@services/make-tilerange');
 const { Tile, Layer, TileRange } = require('@models/');
 
-const greaterExtent = [-95.481, 29.671, -95.252, 29.822];
+const greaterExtent = [-95.5, 29.6, -95.2, 29.9];
 
 const cache = async () => makeTileRange()
   .then(() => Layer.findAll({ order: [['base', 'DESC NULLS LAST']] }))
@@ -21,7 +21,7 @@ const cache = async () => makeTileRange()
             const xmax = Math.min(extent[2], greaterExtent[2]);
             const ymax = Math.min(extent[3], greaterExtent[3]);
             const tiles = [];
-            for (let z = Math.max(9, layer.minzoom); z <= 17; z += 1) {
+            for (let z = Math.max(9, layer.minzoom); z <= 18; z += 1) {
               const minTile = tilebelt.pointToTile(xmin, ymax, z);
               const maxTile = tilebelt.pointToTile(xmax, ymin, z);
               for (let x = minTile[0]; x <= maxTile[0]; x += 1) {
