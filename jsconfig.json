@@ -6,6 +6,7 @@
   },
   "compilerOptions": {
     "moduleResolution": "node",
+    "allowSyntheticDefaultImports": false,
     "baseUrl": ".",
     "paths": {
       "@app/*": ["src"],
@@ -19,5 +20,6 @@
       "@tests/*": ["src/tests/*"],
       "@utils/*": ["src/utils/*"]
     }
-  }
+  },
+  "exclude": ["node_modules", "dist"]
 }
