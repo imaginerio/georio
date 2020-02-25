@@ -6,6 +6,9 @@ module.exports = {
       primaryKey: true,
       type: Sequelize.INTEGER
     },
+    title: {
+      type: Sequelize.TEXT
+    },
     firstyear: {
       type: Sequelize.INTEGER
     },
@@ -14,6 +17,12 @@ module.exports = {
     },
     remoteid: {
       type: Sequelize.STRING
+    },
+    credit: {
+      type: Sequelize.TEXT
+    },
+    creator: {
+      type: Sequelize.TEXT
     },
     VisualId: {
       type: Sequelize.INTEGER,
@@ -26,11 +35,17 @@ module.exports = {
     },
     geom: {
       allowNull: false,
-      type: Sequelize.GEOMETRY('MULTIPOLYGON', 4326)
+      type: Sequelize.GEOMETRY('POLYGON', 4326)
     },
     geom_merc: {
       allowNull: false,
-      type: Sequelize.GEOMETRY('MULTIPOLYGON', 3857)
+      type: Sequelize.GEOMETRY('POLYGON', 3857)
+    },
+    point: {
+      type: Sequelize.GEOMETRY('POINT', 4326)
+    },
+    point_merc: {
+      type: Sequelize.GEOMETRY('POINT', 3857)
     },
     createdAt: {
       allowNull: false,
