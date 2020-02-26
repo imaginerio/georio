@@ -4,7 +4,7 @@ const { Visual } = require('@models');
 
 const init = async () => {
   console.log(`Loading features from ${process.argv[2]}`);
-  const title = process.argv[2].replace(/.*\/(\w*)(exent)?spoly\.shp/gm, `$1s`);
+  const title = process.argv[2].replace(/.*\/(\w*)(extent)?spoly\.shp/gm, `$1s`);
   return Visual.findOne({
     where: { title }
   }).then(async (layer) => {

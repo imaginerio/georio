@@ -8,9 +8,9 @@
     "author": "Axis Maps",
     "src": "src",
     "kind": "service",
-    "last_endpoint": "update-feature",
-    "last_apidesc": "Update a feature properties or geography from a given feature ID",
-    "last_method": "post",
+    "last_endpoint": "getVisual",
+    "last_apidesc": "Get visual layers for a given year",
+    "last_method": "get",
     "last_service": "newVisual",
     "last_middleware": "tileCache",
     "last_util": "geojson-transformer"
