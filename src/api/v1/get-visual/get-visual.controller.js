@@ -50,6 +50,7 @@ exports.getVisual = async (req, res, next) => {
           } else {
             doc.point = [doc.x, doc.y];
             doc.viewcone = doc.geom;
+            visual.viewcone = true;
           }
           return _.omit(doc, 'VisualId', 'remoteid', 'geom', 'box', 'x', 'y');
         });
