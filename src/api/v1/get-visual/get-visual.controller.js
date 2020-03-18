@@ -43,7 +43,7 @@ exports.getVisual = async (req, res, next) => {
       if (docs.length) {
         visual.documents = docs.map((d) => {
           const doc = d;
-          doc.thumb = `https://s3.amazonaws.com/tilecache.axismaps.io/highways-waterways/thumbs/${doc.remoteid}.png`;
+          doc.thumb = `https://s3.amazonaws.com/tilecache.axismaps.io/highways-waterways/thumbs/${doc.remoteid}.jpg`;
           if (!doc.x || !doc.y) {
             doc.extent = [doc.box.coordinates[0][0], doc.box.coordinates[0][2]];
             doc.tiles = `https://s3.amazonaws.com/tilecache.axismaps.io/highways-waterways/${doc.remoteid}/{z}/{x}/{y}.png`;
