@@ -40,6 +40,7 @@ const cache = async () => makeTileRange()
             for (const t of tiles) {
               i += 1;
               spinner.text = `Caching ${layer.title} ${i}/${tiles.length}`;
+              t.LayerId = layer.id;
               const tile = await Tile.findOne({ where: t });
               if (!tile || tile.updatedAt < layer.updatedAt) {
                 await Tile.makeTile(t, layer.dataValues);
