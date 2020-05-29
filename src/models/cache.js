@@ -26,13 +26,16 @@ module.exports = (sequelize, DataTypes) => {
       x,
       y
     } = params;
-    const putObjectPromise = s3.putObject({
-      Bucket: 'tilecache.axismaps.io',
-      Key: `highways-waterways/${layer}/${firstyear}-${lastyear}/${z}/${x}/${y}.pbf`,
-      ACL: 'public-read',
-      Body: pbf
-    }).promise();
-    return putObjectPromise.then(() => Cache.create(params));
+    if (pbf.toString().length > 0) {
+      const putObjectPromise = s3.putObject({
+        Bucket: 'tilecache.axismaps.io',
+        Key: `highways-waterways/${layer}/${firstyear}-${lastyear}/${z}/${x}/${y}.pbf`,
+        ACL: 'public-read',
+        Body: pbf
+      }).promise();
+      return putObjectPromise.then(() => Cache.create(params));
+    }
+    return Promise.resolve();
   };
 
   return Cache;
