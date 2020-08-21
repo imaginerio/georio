@@ -22,7 +22,7 @@ exports.getStyle = async (req, res, next) => {
         type: 'vector'
       }
     },
-    sprite: `http://${host || req.headers.host}/sprites.png`,
+    sprite: `http://${host || req.headers.host}/sprites`,
     glyphs: 'mapbox://fonts/axismaps/{fontstack}/{range}.pbf'
   };
   const thematicLayerIds = [];
