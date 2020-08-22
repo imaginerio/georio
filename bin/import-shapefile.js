@@ -1,6 +1,6 @@
 require('module-alias/register');
 const importShapefile = require('@services/import-shapefile');
-const { Layer } = require('@models');
+const { Layer, Sequelize } = require('@models');
 
 const init = async () => {
   console.log(`Loading features from ${process.argv[2]}`);
@@ -8,7 +8,12 @@ const init = async () => {
   let geometry = process.argv[2].match(/(point|line|poly)/)[0];
   geometry = geometry.match(/poly/) ? 'polygon' : geometry;
   return Layer.findOne({
-    where: { title, geometry }
+    where: {
+      title: {
+        [Sequelize.Op.iLike]: title
+      },
+      geometry
+    }
   }).then(async (layer) => {
     let importLayer = layer;
     if (!layer) {
