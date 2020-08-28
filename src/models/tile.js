@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         f.firstyear,
         f.lastyear,
         f.name,
+        f.namealt,
         t.id AS type,
         ST_AsMVTGeom(geom_merc, TileBBox(${params.z}, ${params.x}, ${params.y}, 3857), 4096, 64, true) AS geom
       FROM ${layer.geometry}s AS f
