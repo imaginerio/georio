@@ -5,7 +5,9 @@ require('module-alias/register');
 const tilebelt = require('@mapbox/tilebelt');
 const ora = require('ora');
 const makeTileRange = require('@services/make-tilerange');
-const { Tile, Layer, TileRange } = require('@models/');
+const {
+  Tile, Layer, TileRange, Sequelize
+} = require('@models/');
 
 // const greaterExtent = [-95.5, 29.6, -95.2, 29.9];
 
@@ -40,7 +42,7 @@ const cache = async () => makeTileRange()
             for (const t of tiles) {
               i += 1;
               spinner.text = `Caching ${layer.title} ${i}/${tiles.length}`;
-              t.LayerId = layer.id;
+              t.LayerId = { [Sequelize.Op.ilike]: layer.id };
               const tile = await Tile.findOne({ where: t });
               if (!tile || tile.updatedAt < layer.updatedAt) {
                 Tile.makeTile(t, layer.dataValues);
