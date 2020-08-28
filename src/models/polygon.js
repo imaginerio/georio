@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     remoteId: DataTypes.INTEGER,
     name: DataTypes.TEXT,
+    namealt: DataTypes.TEXT,
     firstyear: DataTypes.INTEGER,
     lastyear: DataTypes.INTEGER,
     firstdate: DataTypes.DATEONLY,
