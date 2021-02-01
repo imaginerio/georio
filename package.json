@@ -12,7 +12,7 @@
   },
   "scripts": {
     "precommit": "yarn validate",
-    "prestart": "yarn docs",
+    "prestart": "npx yarn docs",
     "start": "cross-env NODE_ENV=production node ./src/index.js",
     "dev": "NODE_ENV=development nodemon ./src/index.js",
     "lint": "eslint '**/*.js' --ignore-path .gitignore --ignore-pattern internals/scripts",
@@ -51,7 +51,6 @@
   ],
   "dependencies": {
     "@mapbox/tilebelt": "^1.0.1",
-    "apidoc": "^0.17.6",
     "async": "^2.6.1",
     "aws-sdk": "^2.253.1",
     "axios": "^0.19.0",
