@@ -6,7 +6,7 @@ require('dotenv-safe').load({
   sample: path.join(process.cwd(), '.env.example')
 });
 
-const dialectOptions = process.env.NODE_ENV === 'production'
+const dialectOptions = process.env.DB_SSL === 'true' && process.env.NODE_ENV !== 'test'
   ? {
     ssl: {
       require: process.env.NODE_ENV === 'production',
