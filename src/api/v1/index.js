@@ -15,6 +15,7 @@ const makeLayerRoute = require('./make-layer');
 const makeTypeRoute = require('./make-type');
 const updateFeatureRoute = require('./update-feature');
 const getVisualRoute = require('./get-visual');
+const changeRoute = require('./change');
 
 router.use('/tiles', tilesRoute);
 router.use('/get/tilejson', tileJSONRoute);
@@ -30,6 +31,7 @@ router.use('/make/layer', makeLayerRoute);
 router.use('/make/type', makeTypeRoute);
 router.use('/update/feature', updateFeatureRoute);
 router.use('/get/visual', getVisualRoute);
+router.use('/change', changeRoute);
 
 
 module.exports = router;

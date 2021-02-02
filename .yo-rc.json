@@ -8,10 +8,10 @@
     "author": "Axis Maps",
     "src": "src",
     "kind": "service",
-    "last_endpoint": "getVisual",
-    "last_apidesc": "Get visual layers for a given year",
-    "last_method": "get",
-    "last_service": "newVisual",
+    "last_endpoint": "change",
+    "last_apidesc": "CRUD methods for working with changes",
+    "last_method": "post",
+    "last_service": "getFeature",
     "last_middleware": "tileCache",
     "last_util": "geojson-transformer"
   }
