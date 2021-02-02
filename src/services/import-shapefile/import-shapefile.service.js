@@ -38,6 +38,7 @@ const importShapefileService = async (file, layer) => layer.getTypes()
             const { properties, geometry } = result.value;
             if (properties.firstyear && properties.lastyear && properties.firstyear <= properties.lastyear) {
               let type;
+              properties.type = properties.type || layer.title;
               if (Object.keys(types).includes(properties.type)) {
                 type = types[properties.type];
               } else {

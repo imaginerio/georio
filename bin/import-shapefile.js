@@ -4,8 +4,8 @@ const { Layer, Sequelize } = require('@models');
 
 const init = async () => {
   console.log(`Loading features from ${process.argv[2]}`);
-  const title = process.argv[2].match(/\w*(?=(point|line|polys?)\.shp$)/gm)[0];
-  let geometry = process.argv[2].match(/(point|line|poly)/)[0];
+  const title = process.argv[2].match(/\w*(?=(point|line|polys?)\.shp$)/gmi)[0];
+  let geometry = process.argv[2].match(/(point|line|poly)/gmi)[0].toLowerCase();
   geometry = geometry.match(/poly/) ? 'polygon' : geometry;
   return Layer.findOne({
     where: {
