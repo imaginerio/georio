@@ -55,6 +55,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   Change.associate = (models) => {
+    Change.belongsTo(models.User);
     Change.belongsTo(models.Point, {
       as: 'originalPoint'
     });
