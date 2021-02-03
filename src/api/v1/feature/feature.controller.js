@@ -1,7 +1,9 @@
 const httpStatus = require('http-status');
+const { omit } = require('underscore');
 const newFeature = require('@services/new-feature');
 const getFeatures = require('@services/get-features');
 const findFeature = require('@services/find-feature');
+const { sequelize } = require('@models/');
 
 /**
  * feature
@@ -42,9 +44,10 @@ exports.create = async (req, res, next) => newFeature({ dataType: 'geojson', dat
 
 exports.update = async (req, res, next) => findFeature(req.params.id).then(async (feature) => {
   if (feature) {
-    const { body } = req;
-    body.geom = body.geometry;
-    return feature.update(req.body)
+    const params = omit(req.body.properties, 'type');
+    params.geom = sequelize.fn('ST_Multi', sequelize.fn('ST_GeomFromGeoJSON', JSON.stringify(req.body.geometry)));
+    params.TypeId = req.body.properties.type;
+    return feature.update(params, { logging: console.log })
       .then(() => {
         res.status(httpStatus.OK);
         return res.json({
