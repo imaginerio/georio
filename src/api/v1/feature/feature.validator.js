@@ -14,7 +14,7 @@ module.exports = {
         tags: Joi.string().allow(null, ''),
         approved: Joi.boolean()
       }),
-      geom: Joi.object().keys({
+      geometry: Joi.object().keys({
         coordinates: Joi.array().required(),
         type: Joi.string().required()
       })

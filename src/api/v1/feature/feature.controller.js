@@ -23,7 +23,7 @@ exports.read = async (req, res, next) => {
   return res.sendStatus(httpStatus.NOT_FOUND);
 };
 
-exports.create = async (req, res, next) => newFeature(req.body)
+exports.create = async (req, res, next) => newFeature({ dataType: 'geojson', data: req.body })
   .then((result) => {
     res.status(httpStatus.OK);
     return res.json({
@@ -42,6 +42,8 @@ exports.create = async (req, res, next) => newFeature(req.body)
 
 exports.update = async (req, res, next) => findFeature(req.params.id).then(async (feature) => {
   if (feature) {
+    const { body } = req;
+    body.geom = body.geometry;
     return feature.update(req.body)
       .then(() => {
         res.status(httpStatus.OK);
