@@ -8,14 +8,12 @@ const getLayersRoute = require('./get-layers');
 const getTimelineRoute = require('./get-timeline');
 const getLegendRoute = require('./get-legend');
 const searchRoute = require('./search');
-const featureRoute = require('./make-feature');
 const probeRoute = require('./probe');
-const getFeaturesRoute = require('./get-features');
 const makeLayerRoute = require('./make-layer');
 const makeTypeRoute = require('./make-type');
-const updateFeatureRoute = require('./update-feature');
 const getVisualRoute = require('./get-visual');
 const changeRoute = require('./change');
+const featureRoute = require('./feature');
 
 router.use('/tiles', tilesRoute);
 router.use('/get/tilejson', tileJSONRoute);
@@ -26,12 +24,11 @@ router.use('/get/legend', getLegendRoute);
 router.use('/search', searchRoute);
 router.use('/make/feature', featureRoute);
 router.use('/probe', probeRoute);
-router.use('/get/features', getFeaturesRoute);
 router.use('/make/layer', makeLayerRoute);
 router.use('/make/type', makeTypeRoute);
-router.use('/update/feature', updateFeatureRoute);
 router.use('/get/visual', getVisualRoute);
 router.use('/change', changeRoute);
+router.use('/feature', featureRoute);
 
 
 module.exports = router;

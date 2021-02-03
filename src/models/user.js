@@ -31,6 +31,12 @@ module.exports = (sequelize, DataTypes) => {
       });
   };
 
+  User.prototype.getEdits = async function (layerId) {
+    const layer = await sequelize.models.Layer.findByPk(layerId);
+    const model = layer.getGeomModel();
+    return model;
+  };
+
   User.associate = (models) => {
     User.hasMany(models.Change);
   };

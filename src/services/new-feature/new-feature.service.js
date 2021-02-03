@@ -21,8 +21,6 @@ const types = {
  *
  */
 const newFeatureService = (body) => {
-  const { type } = body;
-
   const dataType = body.dataType ? body.dataType : 'geojson';
   const geoFunc = dataType ? types[dataType] : types.geojson;
 
@@ -39,6 +37,9 @@ const newFeatureService = (body) => {
   params.id = body.data.id;
   params.geom = sequelize.fn('ST_Multi', geoFunc(geom));
   params.geom_merc = sequelize.fn('ST_Transform', sequelize.fn('ST_Multi', geoFunc(geom)), 3857);
+
+  let { type } = body;
+  if (!type) ({ type } = params);
 
   return Type.findByPk(type)
     .then((typeId) => {

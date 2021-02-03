@@ -48,7 +48,9 @@ module.exports = (sequelize, DataTypes) => {
   ]) {
     const { Type } = sequelize.models;
     const { firstyear, lastyear } = params;
-    const where = {};
+    const where = {
+      approved: true
+    };
     if (firstyear) where.firstyear = { [Op.lte]: firstyear };
     if (lastyear) where.lastyear = { [Op.gte]: lastyear };
 
