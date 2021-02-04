@@ -30,7 +30,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'editedBy'
     });
     Line.belongsTo(models.Line, {
-      foreignKey: 'original'
+      foreignKey: 'original',
+      as: 'originalFeature'
     });
   };
 

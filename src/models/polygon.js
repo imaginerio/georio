@@ -30,7 +30,12 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'editedBy'
     });
     Polygon.belongsTo(models.Polygon, {
-      foreignKey: 'original'
+      foreignKey: 'original',
+      as: 'originalFeature'
+    });
+    Polygon.hasOne(models.Polygon, {
+      foreignKey: 'original',
+      as: 'editedFeature'
     });
   };
 

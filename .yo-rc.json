@@ -11,7 +11,7 @@
     "last_endpoint": "feature",
     "last_apidesc": "CRUD methods for working with features",
     "last_method": "post",
-    "last_service": "findFeature",
+    "last_service": "updateFeature",
     "last_middleware": "tileCache",
     "last_util": "geojson-transformer"
   }

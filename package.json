@@ -11,7 +11,6 @@
     "yarn": "*"
   },
   "scripts": {
-    "precommit": "yarn validate",
     "prestart": "yarn docs",
     "start": "cross-env NODE_ENV=production node ./src/index.js",
     "dev": "NODE_ENV=development nodemon ./src/index.js",

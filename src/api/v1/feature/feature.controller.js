@@ -1,9 +1,8 @@
 const httpStatus = require('http-status');
-const { omit } = require('underscore');
+const findFeature = require('@services/find-feature');
 const newFeature = require('@services/new-feature');
 const getFeatures = require('@services/get-features');
-const findFeature = require('@services/find-feature');
-const { sequelize } = require('@models/');
+const updateFeature = require('@services/update-feature');
 
 /**
  * feature
@@ -42,26 +41,21 @@ exports.create = async (req, res, next) => newFeature({ dataType: 'geojson', dat
     });
   });
 
-exports.update = async (req, res, next) => findFeature(req.params.id).then(async (feature) => {
-  if (feature) {
-    const params = omit(req.body.properties, 'type');
-    params.geom = sequelize.fn('ST_Multi', sequelize.fn('ST_GeomFromGeoJSON', JSON.stringify(req.body.geometry)));
-    params.TypeId = req.body.properties.type;
-    return feature.update(params, { logging: console.log })
-      .then(() => {
-        res.status(httpStatus.OK);
-        return res.json({
-          responseCode: httpStatus.OK,
-          responseMessage: 'OK'
-        });
-      });
-  }
-  res.status(httpStatus.INTERNAL_SERVER_ERROR);
-  return res.json({
-    responseCode: httpStatus.INTERNAL_SERVER_ERROR,
-    responseMessage: 'Invalid feature ID'
+exports.update = async (req, res, next) => updateFeature(req)
+  .then((response) => {
+    res.status(httpStatus.OK);
+    return res.json({
+      responseCode: httpStatus.OK,
+      responseMessage: 'Feature updated',
+      response
+    });
+  }).catch((err) => {
+    res.status(httpStatus.INTERNAL_SERVER_ERROR);
+    return res.json({
+      responseCode: httpStatus.INTERNAL_SERVER_ERROR,
+      responseMessage: err.message
+    });
   });
-});
 
 exports.delete = async (req, res, next) => findFeature(req.params.id).then(async (feature) => {
   if (feature) {
