@@ -11,6 +11,7 @@ module.exports = {
   port: process.env.PORT,
   host: process.env.HOST,
   serviceName: 'georio',
+  sessionKey: process.env.SESSION_SECRET,
   http: {
     timeout: 5000,
     responseType: 'json',

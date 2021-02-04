@@ -5,10 +5,18 @@ const compress = require('compression');
 const methodOverride = require('method-override');
 const cors = require('cors');
 const helmet = require('helmet');
+const passport = require('passport');
+const session = require('express-session');
+const httpStatus = require('http-status');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 // const interceptor = require('express-interceptor');
 const { errorMiddleware } = require('@middlewares/error');
+const { loginMiddleware } = require('@middlewares/login');
 const middlewareMonitoring = require('@middlewares/monitoring');
+const passportConfig = require('./passport');
 const api = require('@api');
+const { sequelize } = require('@models');
+const { sessionKey } = require('./vars');
 
 /**
 * Express instance
@@ -52,6 +60,26 @@ app.use(middlewareMonitoring);
 
 // app.use(finalParagraphInterceptor);
 
+// enable authentication
+if (process.env.NODE_ENV !== 'test') {
+  passportConfig(passport);
+  app.use(
+    session({
+      secret: sessionKey,
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        maxAge: 30 * 24 * 60 * 60 * 1000
+      },
+      store: new SequelizeStore({
+        db: sequelize
+      })
+    })
+  );
+  app.use(passport.initialize());
+  app.use(passport.session());
+}
+
 /**
  * Health status
  */
@@ -60,6 +88,22 @@ healthRoute.get('/health', (req, res) => res.send('OK'));
 app.use('/', healthRoute);
 
 // enable authentication
+// enable authentication
+app.post('/login', loginMiddleware);
+app.get('/logout', (req, res) => {
+  req.logout();
+  req.session.destroy();
+  res.send({
+    responseCode: httpStatus.OK,
+    responseMessage: 'Logged out'
+  });
+});
+app.get('/session', (req, res) => {
+  res.send({
+    responseCode: httpStatus.OK,
+    responseMessage: req.session.passport
+  });
+});
 
 // mount api routes
 app.use('/api', api);
