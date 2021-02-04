@@ -12,7 +12,6 @@ const probeRoute = require('./probe');
 const makeLayerRoute = require('./make-layer');
 const makeTypeRoute = require('./make-type');
 const getVisualRoute = require('./get-visual');
-const changeRoute = require('./change');
 const featureRoute = require('./feature');
 
 router.use('/tiles', tilesRoute);
@@ -27,7 +26,6 @@ router.use('/probe', probeRoute);
 router.use('/make/layer', makeLayerRoute);
 router.use('/make/type', makeTypeRoute);
 router.use('/get/visual', getVisualRoute);
-router.use('/change', changeRoute);
 router.use('/feature', featureRoute);
 
 

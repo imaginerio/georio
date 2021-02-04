@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     lastdate: DataTypes.DATEONLY,
     tags: DataTypes.JSON,
     approved: DataTypes.BOOLEAN,
+    toDelete: DataTypes.BOOLEAN,
     geom: DataTypes.GEOMETRY('MULTIPOLYGON', 4326),
     geom_merc: DataTypes.GEOMETRY('MULTIPOLYGON', 3857)
   }, {
@@ -25,6 +26,12 @@ module.exports = (sequelize, DataTypes) => {
 
   Polygon.associate = (models) => {
     Polygon.belongsTo(models.Type);
+    Polygon.belongsTo(models.User, {
+      foreignKey: 'editedBy'
+    });
+    Polygon.belongsTo(models.Polygon, {
+      foreignKey: 'original'
+    });
   };
 
   return Polygon;

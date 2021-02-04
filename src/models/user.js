@@ -38,7 +38,15 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.associate = (models) => {
-    User.hasMany(models.Change);
+    User.hasMany(models.Polygon, {
+      foreignKey: 'editedBy'
+    });
+    User.hasMany(models.Line, {
+      foreignKey: 'editedBy'
+    });
+    User.hasMany(models.Point, {
+      foreignKey: 'editedBy'
+    });
   };
   return User;
 };

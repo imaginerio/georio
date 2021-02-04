@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     lastdate: DataTypes.DATEONLY,
     tags: DataTypes.JSON,
     approved: DataTypes.BOOLEAN,
+    toDelete: DataTypes.BOOLEAN,
     geom: DataTypes.GEOMETRY('MULTILINESTRING', 4326),
     geom_merc: DataTypes.GEOMETRY('MULTILINESTRING', 3857)
   }, {
@@ -25,6 +26,12 @@ module.exports = (sequelize, DataTypes) => {
 
   Line.associate = (models) => {
     Line.belongsTo(models.Type);
+    Line.belongsTo(models.User, {
+      foreignKey: 'editedBy'
+    });
+    Line.belongsTo(models.Line, {
+      foreignKey: 'original'
+    });
   };
 
   return Line;

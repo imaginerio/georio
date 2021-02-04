@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     lastdate: DataTypes.DATEONLY,
     tags: DataTypes.JSON,
     approved: DataTypes.BOOLEAN,
+    toDelete: DataTypes.BOOLEAN,
     geom: DataTypes.GEOMETRY('MULTIPOINT', 4326),
     geom_merc: DataTypes.GEOMETRY('MULTIPOINT', 3857)
   }, {
@@ -25,6 +26,12 @@ module.exports = (sequelize, DataTypes) => {
 
   Point.associate = (models) => {
     Point.belongsTo(models.Type);
+    Point.belongsTo(models.User, {
+      foreignKey: 'editedBy'
+    });
+    Point.belongsTo(models.Point, {
+      foreignKey: 'original'
+    });
   };
 
   return Point;
