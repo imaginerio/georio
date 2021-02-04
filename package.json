@@ -54,7 +54,7 @@
     "apidoc": "^0.17.6",
     "async": "^2.6.1",
     "aws-sdk": "^2.253.1",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "axios-retry": "^3.1.1",
     "bcryptjs": "2.4.3",
     "bluebird": "^3.5.0",
