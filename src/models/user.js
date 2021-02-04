@@ -39,13 +39,13 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = (models) => {
     User.hasMany(models.Polygon, {
-      foreignKey: 'editedBy'
+      foreignKey: 'edited'
     });
     User.hasMany(models.Line, {
-      foreignKey: 'editedBy'
+      foreignKey: 'edited'
     });
     User.hasMany(models.Point, {
-      foreignKey: 'editedBy'
+      foreignKey: 'edited'
     });
   };
   return User;

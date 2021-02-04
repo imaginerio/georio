@@ -43,16 +43,38 @@ module.exports = (sequelize, DataTypes) => {
     return Layer.getGeomModel(this.geometry);
   };
 
-  Layer.prototype.getGeo = function (params = {}, attributes = [
-    'id', 'name', 'firstyear', 'lastyear', 'approved', 'tags', 'geom', ['TypeId', 'type']
+  Layer.prototype.getGeo = function (user, params = {}, attributes = [
+    'id',
+    'name',
+    'firstyear',
+    'lastyear',
+    'approved',
+    'tags',
+    'geom',
+    ['TypeId', 'type']
   ]) {
     const { Type } = sequelize.models;
     const { firstyear, lastyear } = params;
-    const where = {
-      approved: true
-    };
+    const where = user ? {
+      [Op.or]: [
+        {
+          approved: true,
+          [Op.or]: [
+            { edited: { [Op.ne]: user.id } },
+            { edited: null }
+          ]
+        },
+        {
+          approved: false,
+          edited: user.id
+        }
+      ]
+    } : {};
     if (firstyear) where.firstyear = { [Op.lte]: firstyear };
     if (lastyear) where.lastyear = { [Op.gte]: lastyear };
+    if (user) {
+      attributes.push([Sequelize.literal(`CASE WHEN edited IS NULL OR edited = ${user.id} THEN TRUE ELSE FALSE END`), 'editable']);
+    }
 
     const { id, geometry } = this;
     const model = Layer.getGeomModel(geometry);
@@ -72,7 +94,8 @@ module.exports = (sequelize, DataTypes) => {
           attributes: [],
           where: { id }
         }]
-      }]
+      }],
+      logging: console.log
     });
   };
 

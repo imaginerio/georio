@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
   Line.associate = (models) => {
     Line.belongsTo(models.Type);
     Line.belongsTo(models.User, {
-      foreignKey: 'editedBy'
+      foreignKey: 'edited'
     });
     Line.belongsTo(models.Line, {
       foreignKey: 'original',

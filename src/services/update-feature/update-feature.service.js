@@ -12,9 +12,9 @@ const updateFeatureService = req => findFeature(req.params.id).then(async (featu
     const edit = await feature.getEditedFeature();
     const original = await feature.getOriginalFeature();
     const user = await feature.getUser();
-    const params = omit(req.body.properties, 'type');
+    const params = omit(req.body.properties, 'type', 'approved');
     if (!edit && !original && !user) {
-      params.editedBy = req.user.id;
+      params.edited = req.user.id;
       params.original = req.params.id;
       params.type = req.body.properties.type;
       const data = {

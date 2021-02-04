@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => queryInterface.dropTable('Changes', { cascade: true })
-    .then(() => queryInterface.addColumn('polygons', 'editedBy', {
+    .then(() => queryInterface.addColumn('polygons', 'edited', {
       type: Sequelize.INTEGER,
       references: {
         model: 'Users',
@@ -9,7 +9,7 @@ module.exports = {
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE'
     }))
-    .then(() => queryInterface.addColumn('lines', 'editedBy', {
+    .then(() => queryInterface.addColumn('lines', 'edited', {
       type: Sequelize.INTEGER,
       references: {
         model: 'Users',
@@ -18,7 +18,7 @@ module.exports = {
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE'
     }))
-    .then(() => queryInterface.addColumn('points', 'editedBy', {
+    .then(() => queryInterface.addColumn('points', 'edited', {
       type: Sequelize.INTEGER,
       references: {
         model: 'Users',
@@ -63,9 +63,9 @@ module.exports = {
     .then(() => queryInterface.addColumn('points', 'toDelete', {
       type: Sequelize.BOOLEAN
     })),
-  down: async queryInterface => queryInterface.removeColumn('polygons', 'editedBy')
-    .then(() => queryInterface.removeColumn('lines', 'editedBy'))
-    .then(() => queryInterface.removeColumn('points', 'editedBy'))
+  down: async queryInterface => queryInterface.removeColumn('polygons', 'edited')
+    .then(() => queryInterface.removeColumn('lines', 'edited'))
+    .then(() => queryInterface.removeColumn('points', 'edited'))
     .then(() => queryInterface.removeColumn('polygons', 'original'))
     .then(() => queryInterface.removeColumn('lines', 'original'))
     .then(() => queryInterface.removeColumn('points', 'original'))

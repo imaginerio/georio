@@ -35,6 +35,7 @@ const newFeatureService = (body) => {
   if (!params.firstyear || !params.lastyear) return Promise.reject(new Error('Missing year attributes'));
 
   params.id = body.data.id;
+  params.approved = false;
   params.geom = sequelize.fn('ST_Multi', geoFunc(geom));
   params.geom_merc = sequelize.fn('ST_Transform', sequelize.fn('ST_Multi', geoFunc(geom)), 3857);
 

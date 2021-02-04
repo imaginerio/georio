@@ -17,7 +17,7 @@ exports.read = async (req, res, next) => {
       res.status(httpStatus.INTERNAL_SERVER_ERROR);
       return res.json({
         responseCode: httpStatus.INTERNAL_SERVER_ERROR,
-        responseMessage: err
+        responseMessage: err.message
       });
     });
   }

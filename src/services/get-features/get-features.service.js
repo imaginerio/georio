@@ -1,5 +1,5 @@
 const { omit } = require('underscore');
-const { Layer, User } = require('@models/');
+const { Layer } = require('@models/');
 
 /**
  * GetFeatures Service
@@ -8,15 +8,7 @@ const { Layer, User } = require('@models/');
 const getFeaturesService = (layerId, user) => Layer.findByPk(layerId)
   .then((layer) => {
     if (layer) {
-      return layer.getGeo().then(async (featuresRaw) => {
-        let features = featuresRaw;
-        if (user) {
-          const currentUser = await User.findByPk(user.id);
-          if (currentUser) {
-            const activeEdits = await currentUser.getEdits(layer.id);
-            if (activeEdits) features = [...features, ...activeEdits];
-          }
-        }
+      return layer.getGeo(user).then(async (features) => {
         const geojson = { type: 'FeatureCollection' };
         geojson.features = features.map((f) => {
           const properties = omit(f.dataValues, 'id', 'geom');

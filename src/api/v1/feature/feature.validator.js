@@ -11,8 +11,7 @@ module.exports = {
         firstyear: Joi.number().integer(),
         lastyear: Joi.number().integer(),
         type: Joi.string(),
-        tags: Joi.string().allow(null, ''),
-        approved: Joi.boolean()
+        tags: Joi.string().allow(null, '')
       }),
       geometry: Joi.object().keys({
         coordinates: Joi.array().required(),
