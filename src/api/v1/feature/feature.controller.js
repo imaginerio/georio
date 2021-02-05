@@ -1,8 +1,8 @@
 const httpStatus = require('http-status');
-const findFeature = require('@services/find-feature');
 const newFeature = require('@services/new-feature');
 const getFeatures = require('@services/get-features');
 const updateFeature = require('@services/update-feature');
+const deleteFeature = require('@services/delete-feature');
 
 /**
  * feature
@@ -57,20 +57,16 @@ exports.update = async (req, res, next) => updateFeature(req)
     });
   });
 
-exports.delete = async (req, res, next) => findFeature(req.params.id).then(async (feature) => {
-  if (feature) {
-    return feature.destroy()
-      .then(() => {
-        res.status(httpStatus.OK);
-        return res.json({
-          responseCode: httpStatus.OK,
-          responseMessage: 'OK'
-        });
-      });
-  }
+exports.delete = async (req, res, next) => deleteFeature(req).then(() => {
+  res.status(httpStatus.OK);
+  return res.json({
+    responseCode: httpStatus.OK,
+    responseMessage: 'OK'
+  });
+}).catch((err) => {
   res.status(httpStatus.INTERNAL_SERVER_ERROR);
   return res.json({
     responseCode: httpStatus.INTERNAL_SERVER_ERROR,
-    responseMessage: 'Invalid feature ID'
+    responseMessage: err.message
   });
 });
