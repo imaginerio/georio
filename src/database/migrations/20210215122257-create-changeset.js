@@ -11,7 +11,7 @@ module.exports = {
     title: {
       type: Sequelize.TEXT
     },
-    userId: {
+    UserId: {
       type: Sequelize.INTEGER,
       references: {
         model: 'Users',
