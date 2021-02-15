@@ -28,35 +28,35 @@ module.exports = {
       allowNull: false,
       type: Sequelize.DATE
     }
-  }).then(() => queryInterface.addColumn('polygons', 'changesetId', {
+  }).then(() => queryInterface.addColumn('polygons', 'ChangesetId', {
     type: Sequelize.INTEGER,
     references: {
       model: 'Changesets',
       key: 'id'
     },
     onUpdate: 'CASCADE',
-    onDelete: 'CASCADE'
+    onDelete: 'SET NULL'
   }))
-    .then(() => queryInterface.addColumn('lines', 'changesetId', {
+    .then(() => queryInterface.addColumn('lines', 'ChangesetId', {
       type: Sequelize.INTEGER,
       references: {
         model: 'Changesets',
         key: 'id'
       },
       onUpdate: 'CASCADE',
-      onDelete: 'CASCADE'
+      onDelete: 'SET NULL'
     }))
-    .then(() => queryInterface.addColumn('points', 'changesetId', {
+    .then(() => queryInterface.addColumn('points', 'ChangesetId', {
       type: Sequelize.INTEGER,
       references: {
         model: 'Changesets',
         key: 'id'
       },
       onUpdate: 'CASCADE',
-      onDelete: 'CASCADE'
+      onDelete: 'SET NULL'
     })),
-  down: async queryInterface => queryInterface.dropTable('Changesets')
-    .then(() => queryInterface.removeColumn('polygons', 'changesetId'))
-    .then(() => queryInterface.removeColumn('lines', 'changesetId'))
-    .then(() => queryInterface.removeColumn('points', 'changesetId'))
+  down: async queryInterface => queryInterface.removeColumn('points', 'ChangesetId')
+    .then(() => queryInterface.removeColumn('polygons', 'ChangesetId'))
+    .then(() => queryInterface.removeColumn('lines', 'ChangesetId'))
+    .then(() => queryInterface.dropTable('Changesets'))
 };

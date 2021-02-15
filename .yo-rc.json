@@ -8,10 +8,10 @@
     "author": "Axis Maps",
     "src": "src",
     "kind": "service",
-    "last_endpoint": "feature",
-    "last_apidesc": "CRUD methods for working with features",
+    "last_endpoint": "changeset",
+    "last_apidesc": "CRUD methods for working with changesets",
     "last_method": "post",
-    "last_service": "deleteFeature",
+    "last_service": "createChangeset",
     "last_middleware": "tileCache",
     "last_util": "geojson-transformer"
   }
