@@ -26,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Point.associate = (models) => {
     Point.belongsTo(models.Type);
+    Point.belongsTo(models.Changeset);
     Point.belongsTo(models.User, {
       foreignKey: 'edited'
     });

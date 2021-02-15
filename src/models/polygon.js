@@ -26,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Polygon.associate = (models) => {
     Polygon.belongsTo(models.Type);
+    Polygon.belongsTo(models.Changeset);
     Polygon.belongsTo(models.User, {
       foreignKey: 'edited'
     });
