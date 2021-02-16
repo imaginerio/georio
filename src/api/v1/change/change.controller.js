@@ -10,7 +10,7 @@ exports.change = async (req, res, next) => getChange(null, req.params.id).then((
   return res.json({
     responseCode: httpStatus.OK,
     responseMessage: 'OK',
-    response: changeset
+    response: changeset[0].changes[0]
   });
 }).catch((e) => {
   res.status(httpStatus.INTERNAL_SERVER_ERROR);
