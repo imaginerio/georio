@@ -5,9 +5,13 @@ module.exports = {
   path: '/api/v1/changeset',
   type: 'post',
   joiSchema: {
-    body: {
-      title: Joi.string().required()
-    },
+    body: Joi.object({
+      title: Joi.string(),
+      changes: Joi.array().items(Joi.object({
+        id: Joi.string().required(),
+        approve: Joi.boolean().required()
+      }))
+    }).xor('title', 'changes'),
     response: {
       200: {
         description: 'OK',

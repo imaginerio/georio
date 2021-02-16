@@ -23,6 +23,7 @@ const router = express.Router();
  */
 router.route('/:id?')
   .post(validate(validator.joiSchema), authenticatedMiddleware, controller.create)
-  .get(authenticatedMiddleware, controller.read);
+  .get(authenticatedMiddleware, controller.read)
+  .patch(validate(validator.joiSchema), authenticatedMiddleware, controller.update);
 
 module.exports = router;

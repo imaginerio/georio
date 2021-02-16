@@ -7,7 +7,7 @@ module.exports = {
         key: 'id'
       },
       onUpdate: 'CASCADE',
-      onDelete: 'CASCADE'
+      onDelete: 'SET NULL'
     }))
     .then(() => queryInterface.addColumn('lines', 'edited', {
       type: Sequelize.INTEGER,
@@ -16,7 +16,7 @@ module.exports = {
         key: 'id'
       },
       onUpdate: 'CASCADE',
-      onDelete: 'CASCADE'
+      onDelete: 'SET NULL'
     }))
     .then(() => queryInterface.addColumn('points', 'edited', {
       type: Sequelize.INTEGER,
@@ -25,7 +25,7 @@ module.exports = {
         key: 'id'
       },
       onUpdate: 'CASCADE',
-      onDelete: 'CASCADE'
+      onDelete: 'SET NULL'
     }))
     .then(() => queryInterface.addColumn('polygons', 'original', {
       type: Sequelize.STRING,
@@ -34,7 +34,7 @@ module.exports = {
         key: 'id'
       },
       onUpdate: 'CASCADE',
-      onDelete: 'CASCADE'
+      onDelete: 'SET NULL'
     }))
     .then(() => queryInterface.addColumn('lines', 'original', {
       type: Sequelize.STRING,
@@ -43,7 +43,7 @@ module.exports = {
         key: 'id'
       },
       onUpdate: 'CASCADE',
-      onDelete: 'CASCADE'
+      onDelete: 'SET NULL'
     }))
     .then(() => queryInterface.addColumn('points', 'original', {
       type: Sequelize.STRING,
@@ -52,7 +52,7 @@ module.exports = {
         key: 'id'
       },
       onUpdate: 'CASCADE',
-      onDelete: 'CASCADE'
+      onDelete: 'SET NULL'
     }))
     .then(() => queryInterface.addColumn('polygons', 'toDelete', {
       type: Sequelize.BOOLEAN
