@@ -92,8 +92,8 @@ app.use('/', healthRoute);
 
 // enable authentication
 // enable authentication
-app.post('/login', loginMiddleware);
-app.get('/logout', (req, res) => {
+app.post('/api/v1/login', loginMiddleware);
+app.get('/api/v1/logout', (req, res) => {
   req.logout();
   req.session.destroy();
   res.send({
