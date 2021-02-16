@@ -14,7 +14,8 @@ const updateChangesetService = changes => Promise.all(changes.map(change => find
     if (edit) {
       return edit.update({
         approved: true,
-        edited: null
+        edited: null,
+        ChangesetId: null
       });
     }
   }
@@ -24,7 +25,8 @@ const updateChangesetService = changes => Promise.all(changes.map(change => find
   if (original) {
     return original.update({
       edited: null,
-      toDelete: null
+      toDelete: null,
+      ChangesetId: null
     });
   }
   return Promise.resolve();
