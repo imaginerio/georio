@@ -8,9 +8,9 @@
     "author": "Axis Maps",
     "src": "src",
     "kind": "service",
-    "last_endpoint": "changeset",
-    "last_apidesc": "CRUD methods for working with changesets",
-    "last_method": "post",
+    "last_endpoint": "change",
+    "last_apidesc": "Convenience read method for accessing single change",
+    "last_method": "get",
     "last_service": "updateChangeset",
     "last_middleware": "tileCache",
     "last_util": "geojson-transformer"

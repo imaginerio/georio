@@ -7,7 +7,7 @@ const {
  * GetChangeset Service
  *
  */
-const getChangesetService = (id) => {
+const getChangesetService = (id, changeId) => {
   const where = {};
   if (id) where.id = id;
   const attributes = ['id', 'name', 'firstyear', 'lastyear', 'tags', 'toDelete', 'geom', 'createdAt', 'updatedAt'];
@@ -112,41 +112,45 @@ const getChangesetService = (id) => {
       ],
       required: false
     }]
-  }).then(changesets => changesets.map(cs => ({
-    id: cs.id,
-    title: cs.title,
-    createdAt: cs.createdAt,
-    changes: [...cs.Points, ...cs.Lines, ...cs.Polygons].map((feature) => {
-      const change = {
-        newFeature: {
-          id: feature.id,
-          type: 'Feature',
-          properties: {
-            ...pick(feature, without(attributes, 'geom')),
-            type: feature.Type.id,
-            layerName: feature.Type.Layer.title,
-            layerId: feature.Type.Layer.id
+  }).then(changesets => changesets.map((cs) => {
+    let changes = [...cs.Points, ...cs.Lines, ...cs.Polygons];
+    if (changeId) changes = changes.filter(change => change.id === changeId);
+    return {
+      id: cs.id,
+      title: cs.title,
+      createdAt: cs.createdAt,
+      changes: changes.map((feature) => {
+        const change = {
+          newFeature: {
+            id: feature.id,
+            type: 'Feature',
+            properties: {
+              ...pick(feature, without(attributes, 'geom')),
+              type: feature.Type.id,
+              layerName: feature.Type.Layer.title,
+              layerId: feature.Type.Layer.id
+            },
+            geometry: feature.geom
           },
-          geometry: feature.geom
-        },
-        user: feature.User
-      };
-      if (feature.dataValues.originalFeature) {
-        change.originalFeature = {
-          id: feature.dataValues.originalFeature.id,
-          type: 'Feature',
-          properties: {
-            ...pick(feature.dataValues.originalFeature, without(attributes, 'geom')),
-            type: feature.dataValues.originalFeature.Type.id,
-            layerName: feature.Type.Layer.title,
-            layerId: feature.Type.Layer.id
-          },
-          geometry: feature.dataValues.originalFeature.geom
+          user: feature.User
         };
-      }
-      return change;
-    })
-  })));
+        if (feature.dataValues.originalFeature) {
+          change.originalFeature = {
+            id: feature.dataValues.originalFeature.id,
+            type: 'Feature',
+            properties: {
+              ...pick(feature.dataValues.originalFeature, without(attributes, 'geom')),
+              type: feature.dataValues.originalFeature.Type.id,
+              layerName: feature.Type.Layer.title,
+              layerId: feature.Type.Layer.id
+            },
+            geometry: feature.dataValues.originalFeature.geom
+          };
+        }
+        return change;
+      })
+    };
+  }).filter(cs => cs.changes.length));
 };
 
 module.exports = getChangesetService;
