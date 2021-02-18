@@ -24,7 +24,7 @@ exports.read = async (req, res, next) => {
   return res.sendStatus(httpStatus.NOT_FOUND);
 };
 
-exports.create = async (req, res, next) => newFeature({ dataType: 'geojson', data: req.body })
+exports.create = async (req, res, next) => newFeature({ dataType: 'geojson', data: req.body }, req.user)
   .then((result) => {
     res.status(httpStatus.OK);
     return res.json({

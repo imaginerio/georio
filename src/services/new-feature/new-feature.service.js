@@ -20,7 +20,7 @@ const types = {
  * NewFeature Service
  *
  */
-const newFeatureService = (body) => {
+const newFeatureService = (body, user) => {
   const dataType = body.dataType ? body.dataType : 'geojson';
   const geoFunc = dataType ? types[dataType] : types.geojson;
 
@@ -38,6 +38,8 @@ const newFeatureService = (body) => {
   params.approved = false;
   params.geom = sequelize.fn('ST_Multi', geoFunc(geom));
   params.geom_merc = sequelize.fn('ST_Transform', sequelize.fn('ST_Multi', geoFunc(geom)), 3857);
+
+  if (user) params.edited = user.id;
 
   let { type } = body;
   if (!type) ({ type } = params);
