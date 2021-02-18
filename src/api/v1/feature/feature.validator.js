@@ -6,6 +6,7 @@ module.exports = {
   type: 'post',
   joiSchema: {
     body: {
+      id: Joi.string(),
       properties: Joi.object({
         name: Joi.string().allow(null, ''),
         firstyear: Joi.number().integer(),
