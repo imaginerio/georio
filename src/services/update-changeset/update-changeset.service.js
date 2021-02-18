@@ -7,8 +7,8 @@ const findFeature = require('@services/find-feature');
  */
 const updateChangesetService = changes => Promise.all(changes.map(change => findFeature(change.id).then(async (feature) => {
   const edit = await feature.getEditedFeature() || feature;
-  const original = await feature.getOriginalFeature() || feature;
-  if (change.approved) {
+  const original = await feature.getOriginalFeature();
+  if (change.approve) {
     if (original) await original.destroy();
     if (feature.toDelete) return feature.destroy();
     if (edit) {
