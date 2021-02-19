@@ -40,7 +40,7 @@ app.use(helmet());
 
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors({
-  origin: process.env === 'production' ? /.*\.levantcarta\.org/ : 'http://localhost:3000',
+  origin: process.env === 'production' ? 'https://beta.beirut.levantcarta.org' : 'http://localhost:3000',
   credentials: true
 }));
 
