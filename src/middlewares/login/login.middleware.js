@@ -5,7 +5,9 @@
 //
 
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
 const httpStatus = require('http-status');
+const { sessionKey } = require('@config/vars');
 
 const authenticate = (req, res, next) => new Promise((resolve, reject) => {
   passport.authenticate('local', (err, user) => {
@@ -15,25 +17,25 @@ const authenticate = (req, res, next) => new Promise((resolve, reject) => {
 });
 
 const login = (req, user) => new Promise((resolve, reject) => {
-  req.login(user, (err) => {
+  req.login(user, { session: false }, (err) => {
     if (err) reject(err);
     return resolve();
   });
 });
 
-const regenerateSession = req => new Promise((resolve, reject) => {
-  req.session.regenerate((err) => {
-    if (err) return reject(err);
-    return resolve();
-  });
-});
+// const regenerateSession = req => new Promise((resolve, reject) => {
+//   req.session.regenerate((err) => {
+//     if (err) return reject(err);
+//     return resolve();
+//   });
+// });
 
-const saveSession = req => new Promise((resolve, reject) => {
-  req.session.save((err) => {
-    if (err) return reject(err);
-    return resolve();
-  });
-});
+// const saveSession = req => new Promise((resolve, reject) => {
+//   req.session.save((err) => {
+//     if (err) return reject(err);
+//     return resolve();
+//   });
+// });
 
 const loginMiddleware = (req, res, next) => Promise.resolve()
   .then(async () => {
@@ -53,16 +55,19 @@ const loginMiddleware = (req, res, next) => Promise.resolve()
     // }
 
     await login(req, user);
-    const temp = req.session.passport;
+    // const temp = req.session.passport;
 
-    await regenerateSession(req);
-    req.session.passport = temp;
+    // await regenerateSession(req);
+    // req.session.passport = temp;
 
-    await saveSession(req);
+    // await saveSession(req);
+
+    const body = { id: user.id, email: user.email };
+    const token = jwt.sign({ user: body }, sessionKey);
 
     return res.send({
       responseCode: httpStatus.OK,
-      responseMessage: 'OK'
+      responseMessage: { token }
     });
   })
   .catch(next);

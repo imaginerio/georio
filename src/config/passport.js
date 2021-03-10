@@ -1,4 +1,8 @@
 const LocalStrategy = require('passport-local').Strategy;
+const JWTstrategy = require('passport-jwt').Strategy;
+const ExtractJWT = require('passport-jwt').ExtractJwt;
+
+const { sessionKey } = require('@config/vars');
 const { User } = require('@models');
 
 module.exports = (passport) => {
@@ -12,6 +16,23 @@ module.exports = (passport) => {
       done(null, user);
     })
     .catch(done));
+
+  passport.use(
+    new JWTstrategy(
+      {
+        secretOrKey: sessionKey,
+        jwtFromRequest: ExtractJWT.fromUrlQueryParameter('token')
+      },
+      async (token, done) => {
+        try {
+          return done(null, token.user);
+        } catch (error) {
+          console.log(error);
+          return done(null, null);
+        }
+      }
+    )
+  );
 
   passport.use(
     'local',

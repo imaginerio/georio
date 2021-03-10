@@ -91,7 +91,9 @@ const healthRoute = express.Router();
 healthRoute.get('/health', (req, res) => res.send('OK'));
 app.use('/', healthRoute);
 
-// enable authentication
+// jwt parser
+app.use(passport.authenticate('jwt', { session: false }));
+
 // enable authentication
 app.post('/api/v1/login', loginMiddleware);
 app.get('/api/v1/logout', (req, res) => {

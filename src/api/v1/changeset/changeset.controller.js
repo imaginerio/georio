@@ -24,6 +24,7 @@ exports.create = async (req, res, next) => createChangeset(req.user, req.body.ti
 });
 
 exports.read = async (req, res, next) => getChangeset(req.params.id).then((changeset) => {
+  console.log(req.user);
   res.status(httpStatus.OK);
   return res.json({
     responseCode: httpStatus.OK,
