@@ -50,6 +50,8 @@
   ],
   "dependencies": {
     "@mapbox/tilebelt": "^1.0.1",
+    "@sentry/node": "^6.2.2",
+    "@sentry/tracing": "^6.2.2",
     "apidoc": "^0.17.6",
     "async": "^2.6.1",
     "aws-sdk": "^2.253.1",

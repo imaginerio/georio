@@ -9,20 +9,36 @@ const passport = require('passport');
 const session = require('express-session');
 const httpStatus = require('http-status');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-// const interceptor = require('express-interceptor');
+const Sentry = require('@sentry/node');
+const Tracing = require('@sentry/tracing');
 const { errorMiddleware } = require('@middlewares/error');
 const { loginMiddleware } = require('@middlewares/login');
 const middlewareMonitoring = require('@middlewares/monitoring');
 const passportConfig = require('./passport');
 const api = require('@api');
 const { sequelize } = require('@models');
-const { sessionKey } = require('./vars');
+const { sessionKey, sentry } = require('./vars');
 
 /**
 * Express instance
 * @public
 */
 const app = express();
+
+Sentry.init({
+  dsn: sentry,
+  integrations: [new Sentry.Integrations.Http({ tracing: true }), new Tracing.Integrations.Express({ app })],
+  tracesSampleRate: 1.0
+});
+
+if (process.env.NODE_ENV !== 'test') {
+  app.use(Sentry.Handlers.requestHandler());
+  app.use(Sentry.Handlers.tracingHandler());
+  app.get('/debug-sentry', () => {
+    console.log('ERROR');
+    throw new Error('My first Sentry error!');
+  });
+}
 
 // parse body params and attache them to req.body
 app.use(bodyParser.json());
@@ -119,6 +135,9 @@ app.use('/docs', express.static(path.join(__dirname, '../../docs')));
 
 // public route
 app.use('/', express.static(path.join(__dirname, '../../public')));
+
+// Sentry error handler
+app.use(Sentry.Handlers.errorHandler());
 
 // if error is not an instanceOf APIError, convert it.
 app.use(errorMiddleware.converter);
