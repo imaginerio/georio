@@ -12,6 +12,7 @@ module.exports = {
   host: process.env.HOST,
   serviceName: 'georio',
   sessionKey: process.env.SESSION_SECRET,
+  sentry: process.env.SENTRY,
   http: {
     timeout: 5000,
     responseType: 'json',
