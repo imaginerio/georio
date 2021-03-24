@@ -55,11 +55,12 @@ app.use(methodOverride());
 app.use(helmet());
 
 // enable CORS - Cross Origin Resource Sharing
-const origin = process.env.NODE_ENV === 'production' ? 'https://beta.beirut.levantcarta.org' : 'http://localhost:3000';
-app.use(cors({
-  origin,
-  credentials: true
-}));
+// const origin = process.env.NODE_ENV === 'production' ? 'https://beta.beirut.levantcarta.org' : 'http://localhost:3000';
+// app.use(cors({
+//   origin,
+//   credentials: true
+// }));
+app.use(cors());
 
 // Monitoring
 app.use(middlewareMonitoring);
