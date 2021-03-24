@@ -55,31 +55,10 @@ app.use(methodOverride());
 app.use(helmet());
 
 // enable CORS - Cross Origin Resource Sharing
-// const origin = process.env.NODE_ENV === 'production' ? 'https://beta.beirut.levantcarta.org' : 'http://localhost:3000';
-// app.use(cors({
-//   origin,
-//   credentials: true
-// }));
 app.use(cors());
 
 // Monitoring
 app.use(middlewareMonitoring);
-
-// const finalParagraphInterceptor = interceptor((req, res) => { // eslint-disable-line
-//   return {
-//     isInterceptable: () => true,
-//     intercept: (body, send) => {
-//       try {
-//         req.responseBody = JSON.parse(body);
-//       } catch (e) {
-//         req.responseBody = body;
-//       }
-//       send(body);
-//     }
-//   };
-// });
-
-// app.use(finalParagraphInterceptor);
 
 // enable authentication
 if (process.env.NODE_ENV !== 'test') {
