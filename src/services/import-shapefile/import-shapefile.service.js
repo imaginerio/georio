@@ -35,7 +35,13 @@ const importShapefileService = async (file, layer) => layer.getTypes()
               spinner.succeed();
               return;
             }
-            const { properties, geometry } = result.value;
+
+            const { geometry } = result.value;
+            const properties = {};
+            Object.keys(result.value.properties).forEach((key) => {
+              properties[key.toLowerCase()] = result.value.properties[key];
+            });
+
             if (properties.firstyear && properties.lastyear && properties.firstyear <= properties.lastyear) {
               let type;
               properties.type = properties.type || layer.title;
