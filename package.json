@@ -95,7 +95,7 @@
     "sequelize": "^5.15.1",
     "shapefile": "^0.6.6",
     "through": "^2.3.8",
-    "underscore": "^1.9.1",
+    "underscore": "^1.12.1",
     "universal-cookie-express": "^3.0.7",
     "uuid": "^3.1.0",
     "winston": "^3.1.0",
