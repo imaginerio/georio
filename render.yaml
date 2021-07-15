@@ -13,5 +13,11 @@ services:
         fromDatabase:
           name: levantcarta
           property: connectionString
+      - key: DB_URL_TEST
+        fromDatabase:
+          name: levantcarta
+          property: connectionString
+      - key: DB_SSL
+        value: false
 databases:
   - name: levantcarta
