@@ -4,7 +4,7 @@ services:
     name: levant-carta
     region: oregon
     env: node
-    healthCheckPath: /layers
+    healthCheckPath: /health
     buildCommand: yarn
     startCommand: yarn start
     envVars:
