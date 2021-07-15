@@ -1,0 +1,17 @@
+previewsEnabled: true
+services:
+  - type: web
+    name: levant-carta
+    region: oregon
+    env: node
+    healthCheckPath: /layers
+    buildCommand: yarn
+    startCommand: yarn start
+    envVars:
+      - fromGroup: levant-carta
+      - key: DB_URL
+        fromDatabase:
+          name: levantcarta
+          property: connectionString
+databases:
+  - name: levantcarta
