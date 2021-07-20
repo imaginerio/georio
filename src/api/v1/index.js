@@ -15,6 +15,7 @@ const getVisualRoute = require('./get-visual');
 const featureRoute = require('./feature');
 const changesetRoute = require('./changeset');
 const changeRoute = require('./change');
+const editsRoute = require('./edits');
 
 router.use('/tiles', tilesRoute);
 router.use('/get/tilejson', tileJSONRoute);
@@ -31,6 +32,7 @@ router.use('/get/visual', getVisualRoute);
 router.use('/feature', featureRoute);
 router.use('/changeset', changesetRoute);
 router.use('/change', changeRoute);
+router.use('/edits', editsRoute);
 
 
 module.exports = router;
