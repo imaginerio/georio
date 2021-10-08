@@ -13,7 +13,7 @@ const updateFeatureService = req => findFeature(req.params.id).then(async (featu
     const original = await feature.getOriginalFeature();
     const user = await feature.getUser();
     const params = omit(req.body.properties, 'type', 'approved');
-    if (!edit && !original && !user) {
+    if (!edit && !original && (!user || user.id === req.user.id)) {
       params.edited = req.user.id;
       params.original = req.params.id;
       params.type = req.body.properties.type;
@@ -27,7 +27,7 @@ const updateFeatureService = req => findFeature(req.params.id).then(async (featu
       });
     }
 
-    params.geom = sequelize.fn('ST_Multi', sequelize.fn('ST_GeomFromGeoJSON', JSON.stringify(req.body.geometry)));
+    params.geom = sequelize.fn('ST_SetSRID', sequelize.fn('ST_Multi', sequelize.fn('ST_GeomFromGeoJSON', JSON.stringify(req.body.geometry))), 4326);
     params.TypeId = req.body.properties.type;
     if (edit && user.id === req.user.id) {
       return edit.update(params).then(f => f.id);
