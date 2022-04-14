@@ -53,7 +53,7 @@
     "@sentry/node": "^6.2.2",
     "@sentry/tracing": "^6.2.2",
     "apidoc": "^0.17.6",
-    "async": "^2.6.1",
+    "async": "^3.2.2",
     "aws-sdk": "^2.253.1",
     "axios": "^0.21.2",
     "axios-retry": "^3.1.1",
